@@ -37,7 +37,7 @@ body {
   color: var(--text-primary);
 }
 
-/* Animation Keyframes */
+/* Animation Keyframes - Optimized for 60fps */
 @keyframes pulse {
   0%, 100% { opacity: 0.8; }
   50% { opacity: 1; }
@@ -45,34 +45,102 @@ body {
 
 @keyframes tileHover {
   from {
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) translateZ(0);
     box-shadow: 0 4px 12px var(--shadow);
   }
   to {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.02) translateZ(0);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   }
 }
 
 @keyframes buttonClick {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.98); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1) translateZ(0); }
+  50% { transform: scale(0.98) translateZ(0); }
+  100% { transform: scale(1) translateZ(0); }
 }
 
 @keyframes successCheckmark {
   0% {
-    transform: scale(0.5);
+    transform: scale(0.5) translateZ(0);
     opacity: 0;
   }
   60% {
-    transform: scale(1.2);
+    transform: scale(1.2) translateZ(0);
     opacity: 1;
   }
   100% {
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
     opacity: 1;
   }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateZ(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateZ(0);
+  }
+  70% {
+    transform: scale(0.9) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth transitions */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition-fast {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition-slow {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Utility Classes */
@@ -87,4 +155,124 @@ body {
 
 .premium-shadow-hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive Design System */
+@media (max-width: 639px) {
+  /* Mobile styles */
+  .puzzle-grid {
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .puzzle-tile-mobile {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .input-field-mobile {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 12px;
+    height: 48px;
+  }
+  
+  .button-mobile {
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+  
+  .text-mobile-lg {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .text-mobile-xl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  /* Tablet styles */
+  .puzzle-tile-tablet {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop styles */
+  .puzzle-tile-desktop {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .premium-shadow {
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+  
+  .premium-shadow-hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .pulse {
+    animation: none;
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus indicators */
+.focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --shadow: rgba(0, 0, 0, 0.3);
+  }
+  
+  .premium-shadow {
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 1px solid #000;
+  }
+  
+  .puzzle-tile {
+    border: 2px solid #000;
+  }
+}
+
+/* Dark mode support (for future) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a1a;
+    --surface: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+  }
 }
