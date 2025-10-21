@@ -25,14 +25,19 @@ export const isPuzzleUnlocked = (puzzleId: number, gameState: GlobalGameState): 
   const setConfig = setConfiguration.sets[puzzle.set];
   if (!setConfig) return false;
 
-  // Set 1 is always unlocked
-  if (puzzle.set === 1) return true;
-
-  // Check if all required puzzles from previous set are solved
-  const requiredPuzzles = setConfig.unlockRequirement;
-  return requiredPuzzles.every(reqPuzzleId => 
-    gameState.solvedPuzzles.includes(reqPuzzleId)
-  );
+  // Get puzzles in this set (path)
+  const puzzlesInSet = setConfig.puzzles;
+  const puzzleIndex = puzzlesInSet.indexOf(puzzleId);
+  
+  if (puzzleIndex === -1) return false;
+  
+  // First puzzle in each path is always unlocked
+  if (puzzleIndex === 0) return true;
+  
+  // For subsequent puzzles, check if the previous puzzle in the path is solved
+  const previousPuzzleId = puzzlesInSet[puzzleIndex - 1];
+  if (previousPuzzleId === undefined) return false;
+  return gameState.solvedPuzzles.includes(previousPuzzleId);
 };
 
 /**
@@ -84,7 +89,7 @@ export const generateGridMapping = (gameState: GlobalGameState): GridPosition[] 
 };
 
 /**
- * Check if a set is completed
+ * Check if a path (set) is completed
  */
 export const isSetCompleted = (setNumber: number, gameState: GlobalGameState): boolean => {
   const setConfig = setConfiguration.sets[setNumber];
@@ -96,29 +101,9 @@ export const isSetCompleted = (setNumber: number, gameState: GlobalGameState): b
 };
 
 /**
- * Get the next set that should be unlocked
+ * Get completed paths
  */
-export const getNextUnlockedSet = (gameState: GlobalGameState): number | null => {
-  // Check if set 2 should be unlocked
-  if (gameState.currentSet === 1 && isSetCompleted(1, gameState)) {
-    return 2;
-  }
-  
-  // Check if set 3 should be unlocked
-  if (gameState.currentSet === 2 && isSetCompleted(2, gameState)) {
-    return 3;
-  }
-  
-  return null;
-};
-
-/**
- * Validate set-based unlock logic
- */
-export const validateSetUnlock = (gameState: GlobalGameState): {
-  shouldUnlockSet: number | null;
-  completedSets: number[];
-} => {
+export const getCompletedSets = (gameState: GlobalGameState): number[] => {
   const completedSets: number[] = [];
   
   // Check each set for completion
@@ -128,12 +113,7 @@ export const validateSetUnlock = (gameState: GlobalGameState): {
     }
   }
   
-  const shouldUnlockSet = getNextUnlockedSet(gameState);
-  
-  return {
-    shouldUnlockSet,
-    completedSets
-  };
+  return completedSets;
 };
 
 /**

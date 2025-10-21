@@ -59,12 +59,36 @@ const GridPage: React.FC = () => {
 
   return (
     <motion.div
-      className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 md:p-8"
+      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 flex flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden"
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-purple-300 rounded-full opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`
+            }}
+            animate={{
+              y: [0, -15, 0],
+              opacity: [0.3, 0.7, 0.3],
+              scale: [1, 1.3, 1]
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
@@ -77,33 +101,32 @@ const GridPage: React.FC = () => {
       </div>
 
       {/* Progress Indicator */}
-      <div className="mb-8 bg-white rounded-2xl p-6 shadow-lg">
+      <div className="mb-8 bg-white bg-opacity-90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white border-opacity-20">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-gray-900">Progress</h2>
-          <span className="text-2xl font-bold text-blue-500">
+          <span className="text-2xl font-bold text-purple-600">
             {progress.solved}/9
           </span>
         </div>
         
         {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+        <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
           <motion.div
-            className="bg-gradient-to-r from-blue-500 to-green-500 h-3 rounded-full"
+            className="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 h-4 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress.percentage}%` }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           />
         </div>
         
-        <div className="flex justify-between text-sm text-gray-600">
-          <span>Current Set: {gameState.currentSet}</span>
-          <span>{progress.percentage}% Complete</span>
+        <div className="text-center">
+          <span className="text-lg font-medium text-gray-700">{Math.round(progress.percentage)}% Complete</span>
         </div>
       </div>
 
       {/* Puzzle Grid */}
       <motion.div
-        className="grid grid-cols-3 gap-3 md:gap-6 mb-8"
+        className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto"
         variants={gridVariants}
         initial="initial"
         animate="animate"
@@ -112,55 +135,10 @@ const GridPage: React.FC = () => {
           <PuzzleTile
             key={gridPosition.position}
             gridPosition={gridPosition}
-            className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40"
+            className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40"
           />
         ))}
       </motion.div>
-
-      {/* Set Status */}
-      <div className="bg-white rounded-2xl p-6 shadow-lg max-w-md w-full">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
-          Set Status
-        </h3>
-        
-        <div className="space-y-3">
-          {[1, 2, 3].map((setNum) => {
-            const isCompleted = gameState.completedSets.includes(setNum);
-            const isCurrent = gameState.currentSet === setNum;
-            const isLocked = setNum > gameState.currentSet;
-            
-            return (
-              <div
-                key={setNum}
-                className={`flex items-center justify-between p-3 rounded-xl ${
-                  isCompleted 
-                    ? 'bg-green-100 text-green-800' 
-                    : isCurrent 
-                    ? 'bg-blue-100 text-blue-800'
-                    : 'bg-gray-100 text-gray-500'
-                }`}
-              >
-                <span className="font-medium">Set {setNum}</span>
-                <div className="flex items-center space-x-2">
-                  {isCompleted && (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                  {isCurrent && !isCompleted && (
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-                  )}
-                  {isLocked && (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
       {/* Development Reset Button (only in dev) */}
       {process.env.NODE_ENV === 'development' && (

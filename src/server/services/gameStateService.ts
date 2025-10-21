@@ -1,6 +1,6 @@
 import { redis } from '@devvit/web/server';
 import { GlobalGameState } from '../../shared/types/game';
-import { validateSetUnlock, isGameComplete } from '../../shared/utils/gridUtils';
+import { getCompletedSets, isGameComplete } from '../../shared/utils/gridUtils';
 
 const GAME_STATE_KEY = 'mystery_versal:game_state';
 const GAME_VERSION_KEY = 'mystery_versal:game_version';
@@ -71,14 +71,12 @@ class GameStateService {
       isComplete: newSolvedPuzzles.length === 9
     };
 
-    // Check for set completion and unlocking
-    const { shouldUnlockSet, completedSets } = validateSetUnlock(updatedState);
-    
-    if (shouldUnlockSet) {
-      updatedState.currentSet = shouldUnlockSet;
-    }
-    
+    // Check for set completion
+    const completedSets = getCompletedSets(updatedState);
     updatedState.completedSets = completedSets;
+    
+    // For independent paths, currentSet is not really used, but keep it for compatibility
+    updatedState.currentSet = 1;
 
     await this.saveGameState(updatedState);
     return updatedState;

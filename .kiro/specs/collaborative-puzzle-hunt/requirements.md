@@ -20,18 +20,19 @@ Mystery Versal is a collaborative puzzle hunt game built as a Devvit Web app tha
 6. WHEN a tile is unlocked but unsolved THEN it SHALL be clickable with visual indication
 7. WHEN a tile is solved THEN it SHALL show colored appearance with the image piece and checkmark
 
-### Requirement 2: Three-Tier Unlock System
+### Requirement 2: Independent Path Unlock System
 
-**User Story:** As a player, I want puzzles to unlock in sets as I progress, so that I have a structured progression through the game.
+**User Story:** As a player, I want puzzles to unlock in independent paths as I progress, so that I have multiple progression routes through the game.
 
 #### Acceptance Criteria
 
-1. WHEN the game starts THEN puzzles 1, 2, and 3 SHALL be unlocked (first set) in scrambled grid positions
-2. WHEN puzzles 1, 2, and 3 are all solved THEN puzzles 4, 5, and 6 SHALL unlock (second set)
-3. WHEN puzzles 4, 5, and 6 are all solved THEN puzzles 7, 8, and 9 SHALL unlock (third set)
-4. WHEN a set is not yet unlocked THEN those tiles SHALL display as locked regardless of grid position
-5. WHEN a new set unlocks THEN the system SHALL show unlock animation for the newly available tiles
-6. WHEN users complete each set THEN they SHALL be required to finish the current set before the next set unlocks
+1. WHEN the game starts THEN puzzles 1, 2, and 3 SHALL be unlocked (first tier) in scrambled grid positions
+2. WHEN puzzle 1 is solved THEN puzzle 4 SHALL unlock, and when puzzle 4 is solved THEN puzzle 7 SHALL unlock
+3. WHEN puzzle 2 is solved THEN puzzle 5 SHALL unlock, and when puzzle 5 is solved THEN puzzle 8 SHALL unlock
+4. WHEN puzzle 3 is solved THEN puzzle 6 SHALL unlock, and when puzzle 6 is solved THEN puzzle 9 SHALL unlock
+5. WHEN a puzzle is not yet unlocked THEN it SHALL display as locked regardless of grid position
+6. WHEN a new puzzle unlocks THEN the system SHALL show unlock animation for the newly available tile
+7. WHEN users complete puzzles THEN they SHALL NOT be required to complete other puzzles in the same tier before progressing
 
 ### Requirement 3: Full Page Puzzle Interaction
 
@@ -118,6 +119,10 @@ quirement 7: Jigsaw Puzzle Visual Completion
 6. WHEN elements load THEN they SHALL use elegant loading states instead of harsh spinners
 7. WHEN displaying success states THEN they SHALL include celebratory animations with proper timing
 8. WHEN the interface renders THEN it SHALL be fully responsive and mobile-optimized
+9. WHEN the game starts THEN it SHALL display an intro page with game description and "Play" button
+10. WHEN viewing the main grid page THEN it SHALL have a visually appealing background instead of plain styling
+11. WHEN typing in answer input fields THEN the text SHALL be clearly visible to users
+12. WHEN displaying progress THEN the percentage SHALL be calculated and shown correctly
 
 ### Requirement 9: Mobile Responsiveness and Accessibility
 

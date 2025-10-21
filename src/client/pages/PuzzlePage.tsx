@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAnimations, useGlobalGameState, usePuzzleData } from '../hooks';
 import { Button, Input, LoadingSpinner } from '../components';
-import { SubmitAnswerResponse } from '../../shared/types';
+
 
 const PuzzlePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,8 +17,6 @@ const PuzzlePage: React.FC = () => {
   const [answer, setAnswer] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [successData, setSuccessData] = useState<SubmitAnswerResponse | null>(null);
 
   const puzzle = getPuzzle(puzzleId);
   const tileState = getTileState(puzzleId);
@@ -26,7 +24,7 @@ const PuzzlePage: React.FC = () => {
   useEffect(() => {
     // Redirect if puzzle doesn't exist or is locked
     if (!puzzle || tileState === 'locked') {
-      navigate('/');
+      navigate('/grid');
       return;
     }
 
@@ -48,14 +46,8 @@ const PuzzlePage: React.FC = () => {
       const result = await submitAnswer(puzzleId, answer.trim());
       
       if (result.success) {
-        setSuccessData(result);
-        setShowSuccess(true);
-        setAnswer('');
-        
-        // Auto-return to grid after showing success
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
+        // Navigate back to grid immediately on success
+        navigate('/grid');
       } else {
         setError(result.error || 'Incorrect answer. Please try again.');
       }
@@ -80,80 +72,7 @@ const PuzzlePage: React.FC = () => {
     );
   }
 
-  if (showSuccess && successData) {
-    return (
-      <motion.div
-        className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4"
-        variants={pageVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
-        <div className="bg-white rounded-2xl p-8 shadow-lg max-w-md w-full text-center">
-          {/* Success Animation */}
-          <motion.div
-            className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
-            initial={{ scale: 0 }}
-            animate={{ scale: [0, 1.2, 1] }}
-            transition={{ duration: 0.6, times: [0, 0.6, 1] }}
-          >
-            <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-            </svg>
-          </motion.div>
 
-          <h2 className="text-3xl font-bold text-green-600 mb-4">
-            ✅ CORRECT!!!!!
-          </h2>
-          
-          <p className="text-gray-600 mb-6">
-            Great job solving the {puzzle.subreddit} puzzle!
-          </p>
-
-          {/* Show hint for next puzzle */}
-          {successData.hint && successData.targetSubreddit && (
-            <div className="bg-blue-50 rounded-xl p-4 mb-6">
-              <h3 className="font-semibold text-blue-900 mb-2">
-                Next Hint for {successData.targetSubreddit}:
-              </h3>
-              <p className="text-blue-800 italic">
-                {successData.hint}
-              </p>
-            </div>
-          )}
-
-          {/* Set completion notification */}
-          {successData.setCompleted && (
-            <div className="bg-yellow-50 rounded-xl p-4 mb-6">
-              <h3 className="font-semibold text-yellow-900 mb-2">
-                🎉 Set Complete!
-              </h3>
-              <p className="text-yellow-800">
-                You've completed Set {puzzle.set}!
-                {successData.newSetUnlocked && ` Set ${successData.newSetUnlocked} is now unlocked!`}
-              </p>
-            </div>
-          )}
-
-          {/* Game completion */}
-          {successData.isGameComplete && (
-            <div className="bg-purple-50 rounded-xl p-4 mb-6">
-              <h3 className="font-semibold text-purple-900 mb-2">
-                🏆 Puzzle Hunt Complete!
-              </h3>
-              <p className="text-purple-800">
-                Congratulations! You've solved all puzzles!
-              </p>
-            </div>
-          )}
-
-          <p className="text-sm text-gray-500">
-            Returning to grid in a moment...
-          </p>
-        </div>
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
@@ -167,7 +86,7 @@ const PuzzlePage: React.FC = () => {
       <div className="flex items-center justify-between mb-8 max-w-4xl mx-auto w-full">
         <Button
           variant="ghost"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/grid')}
           className="flex items-center space-x-2"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,11 +153,12 @@ const PuzzlePage: React.FC = () => {
                   label="Your Answer"
                   placeholder="Enter your answer here..."
                   value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAnswer(e.target.value)}
                   error={error || undefined}
                   disabled={submitting}
                   autoFocus
                   className="text-center"
+                  style={{ color: '#1f2937' }}
                 />
               </div>
 

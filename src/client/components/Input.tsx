@@ -25,7 +25,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
     w-full px-4 py-3 text-lg border-2 rounded-xl
     transition-all duration-200
     focus:outline-none focus:ring-4 focus:ring-opacity-50
-    placeholder-gray-400
+    placeholder-gray-400 text-gray-900 bg-white
     touch-target
   `;
 

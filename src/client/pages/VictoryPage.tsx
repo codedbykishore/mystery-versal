@@ -16,7 +16,7 @@ const VictoryPage: React.FC = () => {
   useEffect(() => {
     // Redirect if game is not actually complete
     if (!gameState.isComplete) {
-      navigate('/');
+      navigate('/grid');
       return;
     }
 
@@ -40,7 +40,7 @@ const VictoryPage: React.FC = () => {
         // Clear victory page session storage and refresh the game state
         sessionStorage.removeItem('hasSeenVictory');
         await refreshState();
-        navigate('/');
+        navigate('/grid');
       } else {
         console.error('Failed to reset game');
       }
@@ -209,7 +209,7 @@ const VictoryPage: React.FC = () => {
         <Button
           variant="primary"
           size="large"
-          onClick={() => navigate('/?from=victory')}
+          onClick={() => navigate('/grid?from=victory')}
           className="bg-white text-purple-900 hover:bg-gray-100"
         >
           View Puzzle Grid
