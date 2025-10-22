@@ -1,7 +1,6 @@
 import express from 'express';
-import { GameStateResponse, SubmitAnswerResponse, ErrorResponse } from '../shared/types/api';
-import { GlobalGameState } from '../shared/types/game';
-import { redis, reddit, createServer, context, getServerPort } from '@devvit/web/server';
+import { ErrorResponse } from '../shared/types/api';
+import { reddit, createServer, context, getServerPort } from '@devvit/web/server';
 import { createPost } from './core/post';
 import { gameStateService } from './services/gameStateService';
 import { answerValidationService } from './services/answerValidationService';
@@ -114,12 +113,6 @@ router.post('/api/submit-answer', async (req, res): Promise<void> => {
 // Reset game state (development only)
 router.post('/api/reset-game', async (_req, res): Promise<void> => {
   try {
-    // Only allow in development
-    if (process.env.NODE_ENV === 'production') {
-      res.status(403).json({ success: false, error: 'Not allowed in production' });
-      return;
-    }
-
     await gameStateService.resetGameState();
     const gameState = await gameStateService.getGameState();
     res.json({ success: true, gameState });

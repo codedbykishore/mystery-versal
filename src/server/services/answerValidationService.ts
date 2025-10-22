@@ -11,7 +11,7 @@ class AnswerValidationService {
       .substring(0, 100); // Limit length
   }
 
-  private validateAnswer(input: string, correctAnswer: string): boolean {
+  private isAnswerCorrect(input: string, correctAnswer: string): boolean {
     const sanitized = this.sanitizeInput(input).toLowerCase();
     const correct = correctAnswer.trim().toLowerCase();
     return sanitized === correct;
@@ -29,7 +29,7 @@ class AnswerValidationService {
         };
       }
 
-      const isCorrect = this.validateAnswer(answer, puzzle.answer);
+      const isCorrect = this.isAnswerCorrect(answer, puzzle.answer);
       
       if (!isCorrect) {
         return {

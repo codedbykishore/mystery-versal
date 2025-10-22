@@ -17,27 +17,51 @@ export const gridPositionToPuzzleId = (gridPosition: number): number => {
 
 /**
  * Determine if a puzzle is unlocked based on current game state
+ * Unlocking flow:
+ * - r/Math (1), r/History (2), r/Codes (3) are always unlocked (starting points)
+ * - r/Math (1) unlocks r/Science (4)
+ * - r/Science (4) unlocks r/Biology (7)
+ * - r/Biology (7) unlocks r/Linguistics (8)
+ * - r/History (2) unlocks r/Geography (5)
+ * - r/Geography (5) unlocks r/Linguistics (8)
+ * - r/Codes (3) unlocks r/Chemistry (6)
+ * - r/Chemistry (6) unlocks r/Art (9)
+ * - r/Art (9) unlocks r/Linguistics (8)
  */
 export const isPuzzleUnlocked = (puzzleId: number, gameState: GlobalGameState): boolean => {
-  const puzzle = puzzleConfiguration.find(p => p.id === puzzleId);
-  if (!puzzle) return false;
-
-  const setConfig = setConfiguration.sets[puzzle.set];
-  if (!setConfig) return false;
-
-  // Get puzzles in this set (path)
-  const puzzlesInSet = setConfig.puzzles;
-  const puzzleIndex = puzzlesInSet.indexOf(puzzleId);
+  const solvedPuzzles = gameState.solvedPuzzles;
   
-  if (puzzleIndex === -1) return false;
-  
-  // First puzzle in each path is always unlocked
-  if (puzzleIndex === 0) return true;
-  
-  // For subsequent puzzles, check if the previous puzzle in the path is solved
-  const previousPuzzleId = puzzlesInSet[puzzleIndex - 1];
-  if (previousPuzzleId === undefined) return false;
-  return gameState.solvedPuzzles.includes(previousPuzzleId);
+  switch (puzzleId) {
+    case 1: // r/Math - always unlocked (starting point)
+      return true;
+    
+    case 2: // r/History - always unlocked (starting point)
+      return true;
+    
+    case 3: // r/Codes - always unlocked (starting point)
+      return true;
+    
+    case 4: // r/Science - unlocked by r/Math
+      return solvedPuzzles.includes(1);
+    
+    case 5: // r/Geography - unlocked by r/History
+      return solvedPuzzles.includes(2);
+    
+    case 6: // r/Chemistry - unlocked by r/Codes
+      return solvedPuzzles.includes(3);
+    
+    case 7: // r/Biology - unlocked by r/Science
+      return solvedPuzzles.includes(4);
+    
+    case 8: // r/Linguistics - unlocked by r/Biology OR r/Geography OR r/Art
+      return solvedPuzzles.includes(7) || solvedPuzzles.includes(5) || solvedPuzzles.includes(9);
+    
+    case 9: // r/Art - unlocked by r/Chemistry
+      return solvedPuzzles.includes(6);
+    
+    default:
+      return false;
+  }
 };
 
 /**
