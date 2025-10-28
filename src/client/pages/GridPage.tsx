@@ -1,47 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useGameContext } from '../context/GameContext';
 import { useGlobalGameState } from '../hooks';
-import { LoadingSpinner, ConnectionLine, LockIcon, Button } from '../components';
+import { LoadingSpinner, ConnectionLine, LockIcon } from '../components';
 
 const GridPage: React.FC = () => {
   const navigate = useNavigate();
   const { gridMapping, loading, error } = useGameContext();
-  const { gameState, getProgress, resetGame } = useGlobalGameState();
-  const [isResetting, setIsResetting] = useState(false);
+  const { gameState } = useGlobalGameState();
 
-  const progress = getProgress();
-
-  const handleResetProgress = async () => {
-    if (isResetting) return;
-
-    if (!confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
-      return;
-    }
-
-    setIsResetting(true);
-    console.log('GridPage: Starting reset...');
-    
-    try {
-      // Use the resetGame function from context
-      await resetGame();
-      
-      // Clear session storage
-      sessionStorage.removeItem('hasSeenVictory');
-      console.log('GridPage: Reset completed successfully');
-      
-      // Navigate away and back to force a fresh mount with new data
-      navigate('/', { replace: true });
-      setTimeout(() => {
-        navigate('/grid', { replace: true });
-      }, 100);
-    } catch (error) {
-      console.error('GridPage: Error resetting game:', error);
-      alert('Error resetting progress: ' + (error instanceof Error ? error.message : String(error)));
-      setIsResetting(false);
-    }
-  };
 
 
 
@@ -431,31 +399,7 @@ const GridPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Progress indicator in bottom right */}
-      <div className="absolute bottom-8 right-8 bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4">
-        <div className="text-center">
-          <div className="text-white/90 text-sm mb-2">Progress</div>
-          <div className="text-2xl font-bold text-purple-400">
-            {progress.solved}/9
-          </div>
-          <div className="text-white/70 text-xs">
-            {Math.round(progress.percentage)}% Complete
-          </div>
-        </div>
-      </div>
 
-      {/* Reset Progress Button */}
-      <div className="absolute top-4 right-4 z-50">
-        <Button
-          variant="outline"
-          size="small"
-          onClick={handleResetProgress}
-          disabled={isResetting}
-          className="border-white text-white hover:bg-white hover:text-purple-900 disabled:opacity-50"
-        >
-          {isResetting ? 'Resetting...' : 'Reset Progress'}
-        </Button>
-      </div>
     </div>
   );
 };

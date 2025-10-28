@@ -2,11 +2,11 @@
 
 **A Collaborative Cross-Community Puzzle Hunt for Reddit**
 
-Mystery Versal is a revolutionary collaborative puzzle hunt game built on Reddit's Devvit platform that transforms how communities work together. Players unite across 9 different Reddit communities (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art) to solve interconnected puzzles, unlock new challenges, and reveal a final mystery message.
+Mystery Versal is a revolutionary collaborative puzzle hunt game built on Reddit's Devvit platform that transforms how communities work together. Players embark on a cosmic journey across 9 different Reddit communities (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art) to solve interconnected puzzles, unlock new challenges, and reveal a final mystery message.
 
 The game features real-time global progress sharing where every solved puzzle benefits the entire Reddit community - when ANY player solves a puzzle, it unlocks for EVERYONE worldwide within 5 seconds. This creates a truly collaborative gaming experience that spans multiple subreddits, with no competition, only cooperation.
 
-Built with React, TypeScript, Express, and Framer Motion on the Devvit platform, Mystery Versal creates an immersive space-themed experience where each Reddit community is represented as a unique planet in a cosmic puzzle hunt with stunning 60fps animations, intuitive interactive planet system, and real-time collaboration through optimistic UI updates.
+Built with React, TypeScript, Express, and Framer Motion on the Devvit platform, Mystery Versal creates an immersive space-themed experience where each Reddit community is represented as a unique planet in a cosmic puzzle grid with stunning 60fps animations, intuitive interactive planet system, and real-time collaboration through optimistic UI updates.
 
 When all 9 puzzles are solved, the complete message is revealed: **"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"** - embodying Reddit's collaborative spirit.
 
@@ -23,6 +23,12 @@ This isn't a single-player game - it's a global collaborative experience. When A
 The game uses a flexible branching progression system with three starting points (r/Math, r/History, r/Codes) and multiple paths that converge at r/Linguistics. This prevents bottlenecks and allows multiple players to work on different puzzles simultaneously.
 
 As players solve puzzles, they unlock new challenges for the entire community and contribute to revealing a final message that embodies Reddit's collaborative spirit: **"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"**.
+
+**The Experience:**
+- **Intro Page**: An animated splash screen with floating puzzle pieces, twinkling particles, and a purple gradient background welcomes players with three feature highlights before they begin their journey
+- **Cosmic Grid**: A space-themed visualization with 9 planets arranged in a diagram, each with unique radial gradients, pulsing animations, and connection lines showing puzzle progression
+- **Puzzle Pages**: Clean, focused interfaces where players visit Reddit posts, solve community-specific challenges, and submit answers
+- **Victory Celebration**: A spectacular finale with 100+ confetti particles, trophy animations, and the complete 3x3 puzzle grid revealing the final message
 
 ## 🕹️ How to Play - Step by Step
 
@@ -177,7 +183,7 @@ Unlike traditional puzzle games where players compete against each other, Myster
 - **No Competition**: Players work together toward a shared goal, not against each other
 - **Optimistic Updates**: Instant visual feedback with graceful rollback on server conflicts
 
-**Technical Innovation**: The game uses optimistic UI updates with React Context, Redis persistence, and 5-second polling to create seamless real-time collaboration. When you solve a puzzle, the UI updates instantly, then syncs with the server to unlock it for everyone.
+**Technical Innovation**: The game uses optimistic UI updates with React Context (GameProvider), Redis persistence, and 5-second polling to create seamless real-time collaboration. When you solve a puzzle, the UI updates instantly, then syncs with the server to unlock it for everyone.
 
 ### **2. Cross-Community Reddit Integration**
 Mystery Versal is the first game to create meaningful connections across multiple Reddit communities:
@@ -193,12 +199,12 @@ Mystery Versal is the first game to create meaningful connections across multipl
 ### **3. Immersive Space-Themed Visualization**
 The game transforms puzzle-solving into a cosmic exploration experience:
 
-- **9 Unique Planets**: Each Reddit community is represented as a planet with distinct radial gradients and tier-based colors
-- **Animated Starfield**: 50+ twinkling stars with randomized opacity, scale, and position animations
+- **9 Unique Planets**: Each Reddit community is represented as a planet with distinct radial gradients and tier-based colors (top/mid/bottom/core)
+- **Animated Starfield**: 50+ twinkling stars with randomized opacity, scale, and position animations creating an immersive space atmosphere
 - **Dynamic Visual States**: Planets transform from locked (dimmed + 🔒) → unlocked (glowing + pulsing) → solved (green + ✅)
-- **Flowing Connection Lines**: Animated SVG paths with glow filters and arrow markers show puzzle progression
-- **Interactive Planet System**: Dual interaction system with both SVG and HTML overlay buttons for maximum compatibility
-- **Smooth Animations**: Pulsing planets (2-second cycles), rotating inner rings (20-second cycles), and spring physics
+- **Flowing Connection Lines**: Animated SVG paths with glow filters and arrow markers show puzzle progression routes
+- **Interactive Planet System**: Transparent HTML button overlays positioned over SVG planets with larger click areas for better mobile UX
+- **Smooth Animations**: Pulsing planets (2-second cycles), rotating inner rings (20-second cycles), and spring physics transitions
 
 **Visual Polish**: Built with Framer Motion for 60fps GPU-accelerated animations, spring physics, and smooth page transitions. Every interaction feels premium and responsive.
 
