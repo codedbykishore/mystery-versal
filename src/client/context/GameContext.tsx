@@ -53,13 +53,24 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   }, [gameState]);
 
   const refreshState = async () => {
+    console.log('GameContext: refreshState called');
     try {
+      console.log('GameContext: Fetching /api/game-state');
       const response = await fetch('/api/game-state');
+      console.log('GameContext: Game state response status:', response.status, 'ok:', response.ok);
+      
       if (!response.ok) throw new Error('Failed to fetch game state');
+      
       const data = await response.json();
+      console.log('GameContext: Received game state:', data);
+      console.log('GameContext: Setting game state with solvedPuzzles:', data.solvedPuzzles, 'totalSolved:', data.totalSolved);
+      
       setGameState(data);
       setError(null);
+      
+      console.log('GameContext: Game state updated successfully');
     } catch (err) {
+      console.error('GameContext: Error in refreshState:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -109,12 +120,28 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   };
 
   const resetGame = async () => {
+    console.log('GameContext: resetGame called');
     try {
+      console.log('GameContext: Fetching /api/reset-game');
       const response = await fetch('/api/reset-game', { method: 'POST' });
-      if (!response.ok) throw new Error('Failed to reset game');
+      console.log('GameContext: Reset response status:', response.status, 'ok:', response.ok);
+      
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error('GameContext: Reset failed with response:', errorData);
+        throw new Error('Failed to reset game');
+      }
+      
+      const data = await response.json();
+      console.log('GameContext: Reset successful, response:', data);
+      
+      console.log('GameContext: Calling refreshState after reset');
       await refreshState();
+      console.log('GameContext: refreshState completed after reset');
     } catch (err) {
+      console.error('GameContext: Error in resetGame:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
+      throw err; // Re-throw so caller knows it failed
     }
   };
 

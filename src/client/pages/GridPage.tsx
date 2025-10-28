@@ -1,16 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useGameContext } from '../context/GameContext';
 import { useGlobalGameState } from '../hooks';
-import { LoadingSpinner, ConnectionLine, LockIcon } from '../components';
+import { LoadingSpinner, ConnectionLine, LockIcon, Button } from '../components';
 
 const GridPage: React.FC = () => {
   const navigate = useNavigate();
-  const { gridMapping, loading, error, actions } = useGameContext();
-  const { gameState, getProgress } = useGlobalGameState();
+  const { gridMapping, loading, error } = useGameContext();
+  const { gameState, getProgress, resetGame } = useGlobalGameState();
+  const [isResetting, setIsResetting] = useState(false);
 
   const progress = getProgress();
+
+  const handleResetProgress = async () => {
+    if (isResetting) return;
+
+    if (!confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+      return;
+    }
+
+    setIsResetting(true);
+    console.log('GridPage: Starting reset...');
+    
+    try {
+      // Use the resetGame function from context
+      await resetGame();
+      
+      // Clear session storage
+      sessionStorage.removeItem('hasSeenVictory');
+      console.log('GridPage: Reset completed successfully');
+      
+      // Navigate away and back to force a fresh mount with new data
+      navigate('/', { replace: true });
+      setTimeout(() => {
+        navigate('/grid', { replace: true });
+      }, 100);
+    } catch (error) {
+      console.error('GridPage: Error resetting game:', error);
+      alert('Error resetting progress: ' + (error instanceof Error ? error.message : String(error)));
+      setIsResetting(false);
+    }
+  };
 
 
 
@@ -414,30 +445,17 @@ const GridPage: React.FC = () => {
       </div>
 
       {/* Reset Progress Button */}
-      <button
-        onClick={async () => {
-          if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
-            try {
-              const response = await fetch('/api/reset-game', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-              });
-
-              if (response.ok) {
-                await actions.refreshState();
-              } else {
-                alert('Failed to reset progress. Please try again.');
-              }
-            } catch (error) {
-              alert('Failed to reset progress. Please try again.');
-            }
-          }
-        }}
-        className="absolute top-4 right-4 px-4 py-2 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition-colors shadow-lg z-50 cursor-pointer"
-        style={{ pointerEvents: 'all' }}
-      >
-        🔄 Reset Progress
-      </button>
+      <div className="absolute top-4 right-4 z-50">
+        <Button
+          variant="outline"
+          size="small"
+          onClick={handleResetProgress}
+          disabled={isResetting}
+          className="border-white text-white hover:bg-white hover:text-purple-900 disabled:opacity-50"
+        >
+          {isResetting ? 'Resetting...' : 'Reset Progress'}
+        </Button>
+      </div>
     </div>
   );
 };

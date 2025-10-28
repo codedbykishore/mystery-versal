@@ -210,7 +210,7 @@ const VictoryPage: React.FC = () => {
           variant="primary"
           size="large"
           onClick={() => navigate('/grid?from=victory')}
-          className="bg-white text-purple-900 hover:bg-gray-100"
+          className="bg-white text-gray-900 hover:bg-gray-100"
         >
           View Puzzle Grid
         </Button>

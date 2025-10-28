@@ -2,96 +2,254 @@
 
 **A Collaborative Cross-Community Puzzle Hunt for Reddit**
 
-Mystery Versal is a revolutionary collaborative puzzle hunt game built on Reddit's Devvit platform that transforms how communities work together. Players unite across 9 different Reddit communities to solve interconnected puzzles, unlock jigsaw pieces, and reveal a final mystery message. The game features real-time global progress sharing where every solved puzzle benefits the entire Reddit community, creating a truly collaborative gaming experience that spans multiple subreddits.
+Mystery Versal is a revolutionary collaborative puzzle hunt game built on Reddit's Devvit platform that transforms how communities work together. Players unite across 9 different Reddit communities (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art) to solve interconnected puzzles, unlock new challenges, and reveal a final mystery message.
 
-Built with React, TypeScript, Express, and Framer Motion on the Devvit platform, Mystery Versal creates an immersive space-themed experience where each Reddit community is represented as a unique planet in a cosmic puzzle hunt with stunning 60fps animations, intuitive dual-interaction planet system (direct SVG clicks + overlay buttons), and real-time collaboration through optimistic UI updates.
+The game features real-time global progress sharing where every solved puzzle benefits the entire Reddit community - when ANY player solves a puzzle, it unlocks for EVERYONE worldwide within 5 seconds. This creates a truly collaborative gaming experience that spans multiple subreddits, with no competition, only cooperation.
+
+Built with React, TypeScript, Express, and Framer Motion on the Devvit platform, Mystery Versal creates an immersive space-themed experience where each Reddit community is represented as a unique planet in a cosmic puzzle hunt with stunning 60fps animations, intuitive interactive planet system, and real-time collaboration through optimistic UI updates.
+
+When all 9 puzzles are solved, the complete message is revealed: **"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"** - embodying Reddit's collaborative spirit.
 
 ## 🎮 What is Mystery Versal?
 
-Mystery Versal is an innovative cross-community puzzle hunt that creates a living, breathing collaborative experience across Reddit. The game presents players with a stunning space-themed visualization where 9 planets represent different Reddit communities (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art), each hosting unique puzzles. As players solve puzzles, they unlock new challenges for the entire community and reveal pieces of a final message that embodies Reddit's collaborative spirit.
+Mystery Versal is an innovative cross-community puzzle hunt that creates a living, breathing collaborative experience across Reddit. The game presents players with a stunning space-themed visualization where 9 planets represent different Reddit communities (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art), each hosting unique puzzles.
 
-## 🕹️ How to Play
+**The Core Concept:**
+Navigate a cosmic puzzle grid where each planet represents a Reddit community hosting a unique puzzle. Click on an unlocked planet to visit its puzzle page, then click through to the actual Reddit post in that community. Each puzzle is tailored to the community's expertise - math equations in r/Math, historical riddles in r/History, ciphers in r/Codes, and so on. Solve the puzzle, submit your answer, and unlock new planets for everyone playing the game.
 
-### Step 1: Start Your Journey
-- Launch the game from the Reddit post
-- Click "Start Your Journey" on the intro screen to enter the cosmic puzzle grid
+**What Makes It Special:**
+This isn't a single-player game - it's a global collaborative experience. When ANY player anywhere on Reddit solves a puzzle, it unlocks for EVERYONE within 5 seconds. Your progress contributes to a shared community achievement that persists across all players. The game features real-time synchronization with automatic polling every 5 seconds, so you'll see other players' contributions appear almost instantly.
 
-### Step 2: Choose Your Planet
-- View the space-themed grid showing 9 planets representing different Reddit communities
-- Three starting planets are unlocked: r/Math, r/History, and r/Codes
-- Locked planets show a lock icon 🔒 and will unlock as you progress
-- Solved planets display a green checkmark ✅
+The game uses a flexible branching progression system with three starting points (r/Math, r/History, r/Codes) and multiple paths that converge at r/Linguistics. This prevents bottlenecks and allows multiple players to work on different puzzles simultaneously.
 
-### Step 3: Solve the Puzzle
-- Click any unlocked planet to enter its puzzle page
-- Click "Go to r/[Subreddit] Post" to open the Reddit post in a new tab
-- Read the puzzle carefully - each is tailored to its community's expertise
-- Work with the community or solve it independently
-- Return to the game and enter your answer
+As players solve puzzles, they unlock new challenges for the entire community and contribute to revealing a final message that embodies Reddit's collaborative spirit: **"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"**.
 
-### Step 4: Submit Your Answer
-- Type your answer in the input field
-- Click "Submit Answer" to check if you're correct
-- Correct answers unlock new planets for everyone!
-- Incorrect answers let you try again (10 attempts per minute)
+## 🕹️ How to Play - Step by Step
 
-### Step 5: Unlock the Mystery
-- Each solved puzzle unlocks new planets following branching paths:
-  - r/Math → r/Science → r/Biology → r/Linguistics
-  - r/History → r/Geography → r/Linguistics
-  - r/Codes → r/Chemistry → r/Art → r/Linguistics
-- Track your progress in the bottom-right corner
-- Solve all 9 puzzles to reveal the final message
+### Step 1: Launch the Game
+1. Find the Mystery Versal post in your Reddit feed
+2. Click the "Launch App" button to open the game in full screen
+3. You'll see an animated intro page with floating puzzle pieces (🧩) and a purple gradient background
+4. The intro showcases three key features: "Explore Communities" (🔍), "Solve Puzzles" (🧠), and "Unlock Mysteries" (🏆)
+5. Click **"Start Your Journey"** to enter the cosmic puzzle grid
 
-### Step 6: Victory!
-- When all puzzles are solved, you'll automatically see the victory page
-- Enjoy the confetti celebration 🎉
-- View the complete puzzle revealing: "KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"
-- Reset progress to play again or return to the grid
+### Step 2: Explore the Cosmic Grid
+1. You'll see 9 planets arranged in a space-themed diagram with twinkling stars
+2. Each planet represents a different Reddit community:
+   - **Top Row**: r/Math (Puzzle 1), r/History (Puzzle 2), r/Codes (Puzzle 3)
+   - **Middle Row**: r/Science (Puzzle 4), r/Geography (Puzzle 5), r/Chemistry (Puzzle 6)
+   - **Bottom Row**: r/Biology (Puzzle 7), r/Linguistics (Puzzle 8), r/Art (Puzzle 9)
+3. **Three starting planets are unlocked**: r/Math, r/History, and r/Codes (you can start with any of these)
+4. Locked planets appear dimmed with a 🔒 lock icon
+5. Solved planets display a green ✅ checkmark badge
+6. Animated connection lines show how puzzles unlock each other
+7. Check your progress in the bottom-right corner (e.g., "3/9 - 33% Complete")
+
+### Step 3: Select a Planet
+1. Click on any **unlocked planet** (glowing with pulsing animations and radial gradients)
+2. You'll be taken to that planet's puzzle page with smooth page transitions
+3. The page shows the subreddit name (e.g., "r/Math") and puzzle number (e.g., "Puzzle 1 of 9")
+4. If a puzzle is already solved, you'll see an "Already Solved!" message with a green circular badge
+
+### Step 4: Visit the Reddit Post
+1. Click the **"Go to r/[Subreddit] Post"** button
+2. This opens the actual Reddit post in a new tab
+3. Read the puzzle carefully - each is tailored to its community's expertise:
+   - **r/Math**: Mathematical equations and number puzzles
+   - **r/History**: Historical dates and events
+   - **r/Codes**: Ciphers and encoded messages
+   - **r/Science**: Scientific facts and formulas
+   - **r/Geography**: Location-based challenges
+   - **r/Chemistry**: Chemical compounds and reactions
+   - **r/Biology**: Life science questions
+   - **r/Linguistics**: Language and word puzzles
+   - **r/Art**: Visual and creative challenges
+
+### Step 5: Solve and Submit
+1. Work on the puzzle - you can solve it alone or collaborate with the Reddit community
+2. Once you have the answer, return to the game tab
+3. Enter your answer in the input field (centered on the page)
+4. Click **"Submit Answer"**
+5. **If correct**: You'll be instantly taken back to the grid, and the planet will show a green checkmark. New planets will unlock for everyone!
+6. **If incorrect**: You'll see an error message and can try again (rate limited to prevent spam)
+
+### Step 6: Unlock New Planets
+As you solve puzzles, new planets unlock following these paths:
+- **Path 1**: r/Math (1) → r/Science (4) → r/Biology (7) → r/Linguistics (8)
+- **Path 2**: r/History (2) → r/Geography (5) → r/Linguistics (8)
+- **Path 3**: r/Codes (3) → r/Chemistry (6) → r/Art (9) → r/Linguistics (8)
+
+**Key Points:**
+- Multiple paths lead to r/Linguistics (the convergence point - unlocked when Biology OR Geography OR Art is solved)
+- You can work on multiple puzzles at once if they're unlocked
+- When ANY player solves a puzzle, it unlocks for EVERYONE (global collaboration)
+- Progress updates automatically every 5 seconds through real-time polling
+
+### Step 7: Complete the Hunt
+1. Solve all 9 puzzles to complete the mystery
+2. You'll automatically be taken to the **Victory Page** with:
+   - 🎉 100+ animated confetti particles falling from the sky with random colors and physics
+   - 🏆 Trophy animation with spring physics
+   - The complete 3x3 puzzle grid revealing the final message with staggered piece animations
+3. The revealed message reads: **"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"**
+4. Click **"View Puzzle Grid"** to return to the space map and admire your completed journey
+5. Click **"Reset Progress"** if you want to play again from the beginning (requires confirmation and navigates back to grid)
+
+### Pro Tips:
+- **Start with your strength**: Choose the community you're most familiar with
+- **Check back often**: Other players might unlock new puzzles while you're away
+- **Collaborate**: Discuss puzzles in the Reddit comments to solve them faster
+- **Track progress**: The bottom-right indicator shows how many puzzles are solved
+- **Multiple paths**: If one puzzle is too hard, try a different path
+- **Mobile-friendly**: The game works great on phones with touch-friendly interactions
 
 ### 🎯 How the Game Works
 
-**🚀 Launch Experience**: Players start with an animated intro page featuring floating puzzle pieces, cosmic particle effects, and a purple gradient background (linear-gradient from #1e1b4b → #581c87 → #312e81). The intro showcases three key features with glassmorphism cards: "Explore Communities" (🔍), "Solve Puzzles" (🧠), and "Unlock Mysteries" (🏆) before players click "Start Your Journey" to enter the main game.
+**🚀 Launch Experience**: Players start with an animated intro page featuring floating puzzle pieces (🧩), twinkling particle effects, and a purple gradient background. The intro showcases three key features with glassmorphism cards: "Explore Communities" (🔍), "Solve Puzzles" (🧠), and "Unlock Mysteries" (🏆) before players click "Start Your Journey" to enter the main game.
 
-**🌌 Cosmic Grid Interface**: The main game displays 9 planets arranged in a space diagram with animated starfield background (50+ twinkling stars), each representing a different Reddit community (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art). Each planet features unique radial gradients, tier-based positioning (top/mid/bottom/core), pulsing animations with 2-second cycles, dynamic visual states using SVG graphics with glow filters, and interactive click handling with proper event management.
+**🌌 Cosmic Grid Interface**: The main game displays 9 planets arranged in a space diagram with animated starfield background (50+ twinkling stars with randomized opacity/scale animations), each representing a different Reddit community. Each planet features:
+- Unique radial gradients based on tier (top/mid/bottom/core) with green coloring for solved puzzles
+- Pulsing animations with 2-second cycles for unlocked planets
+- Rotating inner ring details with 20-second rotation cycles
+- Dynamic visual states: locked (dimmed + lock icon), unlocked (glowing + pulsing), solved (green + checkmark)
+- Interactive click handling through absolutely positioned overlay buttons
+- Animated SVG connection lines showing puzzle progression paths with glow effects
 
-**🖱️ Interactive Planet System**: Planets feature clickable SVG elements with overlay buttons positioned absolutely over the SVG using percentage-based positioning. Each planet has larger click areas for better mobile UX, proper event propagation management (stopPropagation), clear cursor states (pointer for unlocked, not-allowed for locked), and seamless navigation to puzzle pages via React Router.
+**🖱️ Interactive Planet System**: Planets feature transparent HTML buttons positioned absolutely over the SVG using percentage-based positioning. Each planet has larger click areas (8% minimum width/height) for better mobile UX, proper cursor states (pointer for unlocked, not-allowed for locked), hover effects (bg-white with 10% opacity), and seamless navigation to puzzle pages via React Router.
 
-**🔓 Smart Progression System**: Puzzles unlock through a flexible branching system that prevents bottlenecks. Three starting puzzles (r/Math, r/History, r/Codes) are always available, with multiple convergence paths leading to r/Linguistics (unlocked by Biology OR Geography OR Art), creating opportunities for parallel solving and strategic choice.
+**🔓 Smart Progression System**: Puzzles unlock through a flexible branching system:
+- **Three starting points**: r/Math (1), r/History (2), and r/Codes (3) are always unlocked
+- **Multiple paths**: 
+  - Path 1: r/Math (1) → r/Science (4) → r/Biology (7) → r/Linguistics (8)
+  - Path 2: r/History (2) → r/Geography (5) → r/Linguistics (8)
+  - Path 3: r/Codes (3) → r/Chemistry (6) → r/Art (9) → r/Linguistics (8)
+- **Convergence design**: r/Linguistics (8) unlocks when Biology (7) OR Geography (5) OR Art (9) is solved
+- **Parallel solving**: Multiple players can work on different puzzles simultaneously
 
 **🧩 Individual Puzzle Flow**:
 1. **Planet Selection**: Click any unlocked planet to enter its dedicated puzzle interface with smooth Framer Motion page transitions
 2. **Reddit Integration**: Click "Go to r/[Subreddit] Post" button to open the actual Reddit puzzle post in a new tab
 3. **Community Solving**: Read the puzzle post and engage with the community to find the solution using domain-specific knowledge
-4. **Answer Submission**: Return to the game and enter your answer in the centered Input component (rate limited to 10 attempts per minute per user)
-5. **Instant Feedback**: Correct answers trigger immediate navigation back to grid, optimistic UI updates, and unlock new puzzles globally
-6. **Already Solved State**: If a puzzle is already solved, the page displays a green checkmark badge with "Already Solved!" message
+4. **Answer Submission**: Return to the game and enter your answer in the centered input field (rate limited to 10 attempts per minute per user)
+5. **Instant Feedback**: Correct answers trigger immediate navigation back to grid with optimistic UI updates that unlock new puzzles globally
+6. **Already Solved State**: If a puzzle is already solved, the page displays a green circular badge with checkmark icon and "Already Solved!" message, but still allows viewing the Reddit post
 
-**🌍 Global Collaboration**: When any player solves a puzzle, it unlocks for ALL players worldwide within 5 seconds through real-time synchronization with optimistic UI updates (GameContext), Redis persistence, and automatic polling (5-second interval).
+**🌍 Global Collaboration**: When any player solves a puzzle, it unlocks for ALL players worldwide within 5 seconds through:
+- Real-time synchronization with automatic polling (5-second interval)
+- Optimistic UI updates for instant visual feedback
+- Redis persistence for global state management
+- Graceful rollback on server conflicts
 
-**🏆 Victory Celebration**: When all 9 puzzles are solved, players automatically navigate to the victory page featuring 100+ physics-based confetti particles (random colors, sizes, delays), trophy animation (scale 0→1 with spring physics), and the complete 3x3 jigsaw puzzle grid revealing the message: *"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"*.
+**🏆 Victory Celebration**: When all 9 puzzles are solved, players automatically navigate to the victory page featuring:
+- 100+ physics-based confetti particles with random colors (6 vibrant colors), sizes (6-18px), and delays (0-3s)
+- Trophy emoji animation (🏆) with spring physics (scale 0→1)
+- Complete 3x3 puzzle grid with staggered piece animations (0.1s delay between each piece)
+- Final message reveal: *"KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"*
+- Options to view the puzzle grid or reset progress (with confirmation dialog)
 
-The game transforms Reddit into a massive collaborative puzzle-solving platform where knowledge from diverse communities comes together to unlock a unified mystery. Each puzzle is carefully crafted to match the expertise and culture of its host subreddit, creating authentic community-specific challenges that encourage exploration of new communities.
+**Progress Tracking**: A progress indicator in the bottom-right corner of the grid page shows solved puzzles (e.g., "3/9") and completion percentage, updating in real-time as the community makes progress. A "Reset Progress" button in the top-right allows players to restart the game (with confirmation).
 
 ### Core Game Mechanics:
 
-- **🌌 Space-Themed Planet Grid**: Nine planets arranged in a cosmic diagram with animated starfield (50+ twinkling stars with randomized opacity/scale animations), flowing SVG connection lines with glow filters, and tiered layout (top, mid, bottom, core) using SVG graphics and Framer Motion animations
-- **🖱️ Dual Interactive Planet System**: BOTH direct SVG click handling AND responsive HTML button overlays (foreignObject) for maximum compatibility - larger click areas (planet size + 20px), proper event management (stopPropagation), cursor states (pointer/not-allowed), hover effects, and seamless React Router navigation
-- **🧩 Dynamic Jigsaw Puzzle**: Nine interconnected puzzles form a complete message when solved: "KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE" with HTML5 Canvas-generated puzzle pieces featuring unique colors (#EF4444, #F97316, #EAB308, etc.) and text fragments rendered with automatic wrapping
+- **🌌 Space-Themed Planet Grid**: Nine planets arranged in a cosmic diagram with animated starfield (50+ twinkling stars with randomized opacity/scale animations), flowing SVG connection lines with glow filters and arrow markers, and tiered layout (top, mid, bottom, core) using SVG graphics and Framer Motion animations
+- **🖱️ Interactive Planet System**: Transparent HTML button overlays positioned absolutely over SVG planets using percentage-based positioning - larger click areas for better UX, proper cursor states (pointer/not-allowed), hover effects, and seamless React Router navigation
+- **🧩 Dynamic Puzzle Pieces**: Nine interconnected puzzles form a complete message when solved: "KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE" with image-based puzzle pieces featuring unique designs, displayed in a 3x3 grid on the victory page
 - **🌐 Cross-Community Integration**: Each puzzle is hosted as an actual Reddit post in a different subreddit with domain-specific challenges tailored to community expertise and culture (Math equations, History dates, Code ciphers, etc.)
 - **🔄 Real-Time Global State**: When anyone solves a puzzle, it unlocks for everyone instantly with 5-second polling (setInterval in GameContext), Redis persistence, optimistic UI updates (temporary state modification before server confirmation), and automatic state synchronization with version control
 - **📊 Flexible Branching Progression**: Smart unlocking system with three starting points (Math, History, Codes) and multiple convergence paths leading to Linguistics (unlocked by Biology OR Geography OR Art), preventing bottlenecks and enabling strategic choice
-- **🎯 Hint-Driven Discovery**: Solved puzzles provide cryptic clues pointing to the next challenge with numerical hints matching the target puzzle answer (e.g., "The atomic number is 4" for Science puzzle)
+- **🎯 Hint System**: Each puzzle configuration includes a hintText field that provides cryptic clues pointing to the next challenge with numerical hints matching the target puzzle answer (e.g., "The atomic number is 4" for Science puzzle)
 - **⚡ Optimistic Updates**: Instant visual feedback with seamless state synchronization using React Context (GameProvider) - temporarily adds puzzleId to solvedPuzzles array, then refreshes from server with graceful rollback on incorrect answers or errors
-- **🎨 Dynamic Visual States**: Planets transform from locked (grey + LockIcon component with shackle/body/keyhole) → unlocked (glowing + pulsing animations + radial gradients) → solved (full-color + green checkmark badge with SVG path)
-- **🏆 Victory Celebration**: 100+ physics-based confetti particles (random x/y positions, colors, sizes, delays with 4-second fall animations), trophy animation (scale 0→1 with spring physics), and complete 3x3 puzzle grid reveal with staggered piece animations
-- **📱 Mobile-First Design**: Responsive interface optimized for Reddit's mobile-heavy user base with touch-friendly interactions, improved click areas (60px minimum), glassmorphism effects (backdrop-blur-sm), and adaptive layouts (grid-cols-1 md:grid-cols-3)
-- **🔐 Rate Limiting**: 10 answer attempts per minute per user with in-memory Map-based tracking (rateLimitMap) to prevent spam while allowing exploration
+- **🎨 Dynamic Visual States**: Planets transform from locked (dimmed opacity + LockIcon component) → unlocked (full brightness + pulsing animations + radial gradients + rotating inner rings) → solved (green gradient + circular checkmark badge positioned at top-right of planet)
+- **🏆 Victory Celebration**: 100+ physics-based confetti particles (random x/y positions, 6 vibrant colors, random sizes 6-18px, delays 0-3s with 4-second fall animations including rotation), trophy emoji animation (🏆 scale 0→1 with spring physics), and complete 3x3 puzzle grid reveal with staggered piece animations (0.1s delay between each piece)
+- **📱 Mobile-First Design**: Responsive interface optimized for Reddit's mobile-heavy user base with touch-friendly interactions, improved click areas on planets, glassmorphism effects (backdrop-blur-sm with rgba backgrounds), and adaptive layouts (responsive text sizes, flexible grids)
+- **🔐 Rate Limiting**: 10 answer attempts per minute per user with server-side tracking to prevent spam while allowing exploration
 - **🎮 Error Boundaries**: Comprehensive error handling with ErrorBoundary components wrapping the entire app, graceful fallbacks, and user-friendly error messages with retry buttons
+- **🔄 Reset Progress**: Players can reset their progress at any time from either the grid page or victory page, with a confirmation dialog to prevent accidental resets and complete page reload to ensure reset state is shown
 
-## 🚀 What Makes Mystery Versal Revolutionary & Unique
+## 🚀 What Makes Mystery Versal Innovative & Unique
 
-### **🏗️ Technical Architecture**
+### **1. True Global Collaboration - Not Competition**
+Unlike traditional puzzle games where players compete against each other, Mystery Versal creates a genuinely collaborative experience:
+
+- **Shared Progress**: When ANY player solves a puzzle, it unlocks for EVERYONE worldwide within 5 seconds
+- **Real-Time Synchronization**: Automatic polling every 5 seconds shows other players' contributions almost instantly
+- **Persistent Community Achievement**: Your progress contributes to a permanent global state stored in Redis
+- **No Competition**: Players work together toward a shared goal, not against each other
+- **Optimistic Updates**: Instant visual feedback with graceful rollback on server conflicts
+
+**Technical Innovation**: The game uses optimistic UI updates with React Context, Redis persistence, and 5-second polling to create seamless real-time collaboration. When you solve a puzzle, the UI updates instantly, then syncs with the server to unlock it for everyone.
+
+### **2. Cross-Community Reddit Integration**
+Mystery Versal is the first game to create meaningful connections across multiple Reddit communities:
+
+- **9 Different Communities**: Each puzzle is hosted in a different subreddit (r/Math, r/History, r/Codes, r/Science, r/Geography, r/Chemistry, r/Biology, r/Linguistics, r/Art)
+- **Community-Specific Challenges**: Puzzles are tailored to each subreddit's expertise and culture
+- **Native Reddit Posts**: Each puzzle is an actual Reddit post, not a separate webpage
+- **Authentic Engagement**: Players interact with real communities to solve puzzles
+- **Discovery Experience**: Encourages exploration of new subreddits you might never have visited
+
+**Why This Matters**: Instead of being isolated in a single subreddit, the game creates a narrative bridge that connects diverse communities, from mathematics to art, creating a journey through different domains of human knowledge.
+
+### **3. Immersive Space-Themed Visualization**
+The game transforms puzzle-solving into a cosmic exploration experience:
+
+- **9 Unique Planets**: Each Reddit community is represented as a planet with distinct radial gradients and tier-based colors
+- **Animated Starfield**: 50+ twinkling stars with randomized opacity, scale, and position animations
+- **Dynamic Visual States**: Planets transform from locked (dimmed + 🔒) → unlocked (glowing + pulsing) → solved (green + ✅)
+- **Flowing Connection Lines**: Animated SVG paths with glow filters and arrow markers show puzzle progression
+- **Interactive Planet System**: Dual interaction system with both SVG and HTML overlay buttons for maximum compatibility
+- **Smooth Animations**: Pulsing planets (2-second cycles), rotating inner rings (20-second cycles), and spring physics
+
+**Visual Polish**: Built with Framer Motion for 60fps GPU-accelerated animations, spring physics, and smooth page transitions. Every interaction feels premium and responsive.
+
+### **4. Flexible Branching Progression**
+Unlike linear puzzle games, Mystery Versal offers strategic choice:
+
+- **3 Starting Points**: r/Math, r/History, and r/Codes are always unlocked
+- **Multiple Paths**: Three distinct progression routes prevent bottlenecks
+- **Convergence Design**: All paths lead to r/Linguistics (unlocked when Biology OR Geography OR Art is solved)
+- **Parallel Solving**: Multiple players can work on different puzzles simultaneously
+- **Strategic Choice**: Choose your path based on interests, expertise, or community activity
+- **Visual Guidance**: Animated connection lines show how puzzles unlock each other
+
+**Progression Paths:**
+```
+Path 1: r/Math (1) → r/Science (4) → r/Biology (7) → r/Linguistics (8)
+Path 2: r/History (2) → r/Geography (5) → r/Linguistics (8)
+Path 3: r/Codes (3) → r/Chemistry (6) → r/Art (9) → r/Linguistics (8)
+```
+
+This design ensures that up to 3 puzzles can be available simultaneously at the start, allowing the community to distribute effort and preventing any single puzzle from blocking progress.
+
+### **5. Premium User Experience**
+Mystery Versal delivers a polished, professional gaming experience:
+
+- **Buttery Smooth Animations**: 60fps GPU-accelerated animations with Framer Motion
+- **Mobile-First Design**: Optimized for Reddit's mobile-heavy user base with touch-friendly interactions
+- **Glassmorphism Effects**: Modern design with backdrop blur and premium shadows on the intro page
+- **Celebration System**: 100+ physics-based confetti particles with random colors, sizes, and delays on victory
+- **Error Boundaries**: Comprehensive error handling with graceful fallbacks and user-friendly error messages
+- **Optimistic Updates**: Instant visual feedback with seamless server synchronization and graceful rollback
+- **Rate Limiting**: Server-side rate limiting to prevent spam while allowing exploration
+
+**Technical Stack**: React + TypeScript + Express + Framer Motion + Tailwind CSS + Vite, all running on Reddit's Devvit platform with Redis persistence.
+
+### **6. Built Natively on Reddit's Devvit Platform**
+Mystery Versal leverages Reddit's modern development platform:
+
+- **Native Integration**: Appears directly in Reddit feeds with "Launch App" functionality
+- **Automatic Authentication**: Uses Reddit accounts - no separate login required
+- **Moderator Tools**: Built-in post creation and community management via menu actions
+- **Cloud Hosting**: Hosted on Reddit's infrastructure for reliability and scalability
+- **Redis Persistence**: Global state management with atomic operations and version control
+- **RESTful API**: Express.js backend with dedicated service layer for game state and answer validation
+
+**Modern Architecture**: Express.js backend with RESTful API endpoints (`/api/game-state`, `/api/submit-answer`, `/api/reset-game`), React frontend with TypeScript and React Router, and service-based architecture for clean separation of concerns.
+
+---
+
+## 🏗️ Technical Architecture
+
 Mystery Versal is built with a modern, scalable architecture that leverages the latest web technologies:
 
 **Frontend (React + TypeScript)**
@@ -126,8 +284,8 @@ Mystery Versal is built with a modern, scalable architecture that leverages the 
 - **React Router** manages four main pages: IntroPage → GridPage → PuzzlePage → VictoryPage
 - **GameContext** provides global state management with optimistic updates and real-time synchronization
 - **Custom Hooks** (useGlobalGameState, usePuzzleData, useAnimations) encapsulate game logic and UI interactions
-- **Dual SVG-based Planet System** with dynamic visual states, connection lines, and both direct SVG and overlay button interactions
-- **Canvas-generated Puzzle Pieces** create the final jigsaw puzzle with unique colors and text fragments using HTML5 Canvas API
+- **SVG-based Planet System** with dynamic visual states, animated connection lines, and overlay button interactions
+- **Image-based Puzzle Pieces** create the final jigsaw puzzle reveal with unique pieces for each solved puzzle
 
 ### **🎮 True Cross-Platform Reddit Integration**
 Unlike traditional web games, Mystery Versal is built natively on Reddit's Devvit platform, creating seamless integration with Reddit's ecosystem:
@@ -143,12 +301,12 @@ Unlike traditional web games, Mystery Versal is built natively on Reddit's Devvi
 ### **🌌 Immersive Space-Themed Experience**
 Unlike traditional grid-based puzzle games, Mystery Versal transforms the puzzle-solving experience into a cosmic journey. Each Reddit community is represented as a unique planet in a stunning space visualization, complete with:
 
-- **Dynamic Planet States**: Planets transform from locked (grey with lock icons) to unlocked (glowing with pulsing animations) to solved (full-color with checkmarks)
+- **Dynamic Planet States**: Planets transform from locked (dimmed with lock icons) to unlocked (glowing with pulsing animations) to solved (green with checkmarks)
 - **Animated Starfield**: 50+ twinkling stars with randomized opacity, scale, and position animations create an immersive space atmosphere
 - **Flowing Connection Lines**: SVG-based animated pathways between planets show puzzle progression routes with glow effects and arrow markers
-- **Tiered Cosmic Layout**: Planets are arranged in meaningful tiers (top, mid, bottom, core) with unique color gradients for each tier
-- **Real-Time Visual Feedback**: Planets pulse, glow, and transform as the community makes progress with smooth animations
-- **Dual Interactive Navigation**: Both direct SVG click handling and responsive overlay buttons with improved UX including larger click areas, proper cursor states, hover effects, and seamless navigation to puzzle interfaces
+- **Tiered Cosmic Layout**: Planets are arranged in meaningful tiers (top, mid, bottom, core) with unique radial gradients for each tier
+- **Real-Time Visual Feedback**: Planets pulse, glow, and transform as the community makes progress with smooth 60fps animations
+- **Interactive Planet System**: Transparent HTML button overlays positioned over SVG planets with larger click areas, proper cursor states, hover effects, and seamless React Router navigation
 
 ### **🌐 Real-Time Global Collaboration Engine**
 Mystery Versal pioneered persistent cross-community gaming on Reddit with a sophisticated real-time collaboration system. Unlike traditional single-player puzzle games, every action contributes to a shared global state backed by Redis persistence. When any player anywhere on Reddit solves a puzzle, it instantly unlocks for everyone through optimistic updates and 5-second polling, creating a living, breathing collaborative experience that spans the entire platform.
@@ -171,10 +329,10 @@ Mystery Versal pioneered persistent cross-community gaming on Reddit with a soph
 The game creates meaningful connections between 9 diverse Reddit communities through a flexible branching progression system that spans different domains of human knowledge:
 
 **Branching Progression System:**
-- **Starting Point**: r/Math (Puzzle 1) - Always unlocked
-- **Primary Branches**: r/Math unlocks both r/History (2) and r/Science (4)
-- **Convergence Points**: Multiple paths lead to r/Linguistics (8) - the penultimate challenge
-- **Final Challenge**: r/Art (Puzzle 9) - Requires all other 8 puzzles to be completed
+- **Starting Points**: r/Math (1), r/History (2), r/Codes (3) - Always unlocked
+- **Branching Paths**: Each starting point leads to a unique progression chain
+- **Convergence Point**: Multiple paths lead to r/Linguistics (8) - the penultimate challenge
+- **Final Challenge**: r/Art (Puzzle 9) - Unlocked by r/Chemistry, then unlocks r/Linguistics
 
 **Detailed Unlocking Flow:**
 - **Starting Points**: r/Math (1), r/History (2), r/Codes (3) - Always unlocked
@@ -182,17 +340,16 @@ The game creates meaningful connections between 9 diverse Reddit communities thr
 - r/History (2) → r/Geography (5) → r/Linguistics (8)  
 - r/Codes (3) → r/Chemistry (6) → r/Art (9) → r/Linguistics (8)
 
-*Note: r/Linguistics (8) serves as the convergence point - it unlocks when ANY of the three paths (Biology, Geography, or Art) is completed, creating multiple strategic routes to the final challenge.*
+*Note: r/Linguistics (8) serves as the convergence point - it unlocks when Biology (7) OR Geography (5) OR Art (9) is solved, creating multiple strategic routes to reach it.*
 
-**Visual Connection System**: The space diagram displays animated connection lines with flowing effects and arrow markers that represent these unlocking relationships:
-- Math → Science (curved SVG path with glow effects)
-- Science → Biology (curved path with animated trail)
-- Biology → Linguistics (curved path converging to center)
-- History → Geography (straight path with pulsing animation)
-- Geography → Linguistics (straight path converging to center)
-- Codes → Chemistry (straight path with flowing particles)
-- Chemistry → Art (curved path with glow trail)
-- Art → Linguistics (curved path converging to center)
+**Visual Connection System**: The space diagram displays animated connection lines with flowing effects and arrow markers that represent these unlocking relationships, creating a beautiful cosmic map of puzzle dependencies.
+- Science (4) → Biology (7) - Diagonal curved path with animated trail
+- Biology (7) → Linguistics (8) - Curved path converging to center
+- History (2) → Geography (5) - Vertical straight path with pulsing animation
+- Geography (5) → Linguistics (8) - Vertical straight path converging to center
+- Codes (3) → Chemistry (6) - Vertical straight path with flowing particles
+- Chemistry (6) → Art (9) - Diagonal curved path with glow trail
+- Art (9) → Linguistics (8) - Curved path converging to center
 
 **What Makes This Unique:**
 - **Community-Specific Challenges**: Each puzzle is tailored to match the host subreddit's expertise and culture
@@ -310,22 +467,22 @@ Mystery Versal delivers a polished, professional gaming experience that rivals c
 **🖱️ Interactive Planet System**
 The game implements a sophisticated interaction system for maximum compatibility and accessibility:
 
-- **SVG Planet Graphics**: Each planet is rendered as an SVG `<g>` element with onClick handlers for direct interaction
-- **Absolute Positioned Buttons**: Transparent HTML buttons are positioned absolutely over each planet using percentage-based positioning calculated from SVG coordinates
-- **Event Management**: Both SVG and button elements use proper event handling with `stopPropagation()` to prevent conflicts
-- **Larger Click Areas**: Buttons extend beyond planet boundaries for better mobile UX (8% minimum width/height)
+- **SVG Planet Graphics**: Each planet is rendered as an SVG `<g>` element with visual elements (circles, gradients, animations) but with `pointerEvents: 'none'` to prevent interference
+- **Absolute Positioned Buttons**: Transparent HTML buttons are positioned absolutely over each planet using percentage-based positioning calculated from SVG coordinates (left: `${(planet.x / 1000) * 100}%`, top: `${(planet.y / 700) * 100}%`)
+- **Event Management**: Buttons use proper event handling with `onClick` handlers that call `handlePlanetClick()` to navigate to puzzle pages
+- **Larger Click Areas**: Buttons extend beyond planet boundaries for better mobile UX (8% minimum width/height with `transform: translate(-50%, -50%)` for centering)
 - **Proper Cursor States**: Visual feedback with `cursor-pointer` for unlocked planets and `cursor-not-allowed` for locked ones
-- **Pointer Events Control**: Strategic use of `pointerEvents: 'none'` on containers and proper z-index management
-- **Accessibility Features**: ARIA labels and title attributes for screen readers
-- **React Router Navigation**: Seamless navigation to puzzle pages via `useNavigate()` hook
+- **Z-Index Management**: Buttons have `zIndex: 10` to ensure they're above SVG elements while maintaining proper layering
+- **Accessibility Features**: `title` and `aria-label` attributes for screen readers with planet names
+- **React Router Navigation**: Seamless navigation to puzzle pages via `useNavigate()` hook with path `/puzzle/${planet.puzzleId}`
 
 This approach ensures the game works flawlessly across all browsers and devices while maintaining visual polish.
 
 **🎨 Complete User Interface**
-- **Intro Page**: Animated landing page with floating puzzle pieces, gradient backgrounds, and feature showcase
-- **Grid Page**: Interactive space-themed planet visualization with SVG graphics and Framer Motion animations
-- **Puzzle Page**: Clean puzzle-solving interface with Reddit integration and answer submission
-- **Victory Page**: Celebration screen with confetti animations and completed jigsaw puzzle reveal
+- **Intro Page**: Animated landing page with floating puzzle pieces (🧩), twinkling particles, purple gradient background, glassmorphism feature cards, and "Start Your Journey" button
+- **Grid Page**: Interactive space-themed planet visualization with SVG graphics, animated starfield, connection lines, planet states, progress indicator, and reset button
+- **Puzzle Page**: Clean puzzle-solving interface with back button, subreddit header, "Go to r/[Subreddit] Post" button, answer input field, submit button, and instructions panel
+- **Victory Page**: Celebration screen with 100+ confetti particles, trophy animation (🏆), 3x3 puzzle grid reveal, final message display, and action buttons
 
 **🔧 Core Game Mechanics**
 - **Real-time Global State**: Redis-backed persistence with 5-second polling for live collaboration
@@ -335,9 +492,13 @@ This approach ensures the game works flawlessly across all browsers and devices 
 - **Error Handling**: Comprehensive error boundaries and user-friendly error messages
 
 **🎯 Interactive Elements**
-- **Dual Planet Interaction System**: BOTH direct SVG click handling (on `<g>` elements) AND responsive HTML button overlays (using `<foreignObject>`) for maximum browser/device compatibility and accessibility
-- **Proper Event Management**: stopPropagation on both interaction methods prevents event conflicts and ensures smooth navigation
-- **Enhanced Click Areas**: Larger interactive zones (planet size + 20px) with transparent overlay buttons for better mobile UX
+- **Planet Interaction System**: Transparent HTML button overlays positioned absolutely over SVG planets for maximum browser/device compatibility and accessibility
+- **Proper Event Management**: Buttons handle click events with proper disabled states for locked planets
+- **Enhanced Click Areas**: Buttons sized at 8% minimum width/height with transform centering for better mobile UX
+- **Visual Feedback**: Hover effects (bg-white/bg-opacity-10) and cursor states (pointer/not-allowed) provide clear interaction cues
+- **Navigation Flow**: Intro → Grid → Puzzle → Victory with smooth Framer Motion transitions and React Router
+- **Answer Submission**: Input component with error states, loading states, and rate limiting feedback
+- **Progress Tracking**: Real-time progress indicator showing solved/total puzzles and completion percentage**: Larger interactive zones (planet size + 20px) with transparent overlay buttons for better mobile UX
 - **Visual State Management**: Dynamic planet transformations (locked → unlocked → solved) with radial gradients and animations
 - **Connection Lines**: Animated SVG paths showing puzzle progression relationships with glow effects
 - **Progress Tracking**: Real-time community progress indicator with percentage completion in bottom-right corner
@@ -410,6 +571,7 @@ The game is **fully functional** with all core features implemented and ready fo
 - **Victory Page Reset**: Click "Reset Progress" button after completing the game
 - **Confirmation Required**: Both reset options require confirmation to prevent accidental resets
 - **Community-Wide**: Resetting affects the entire community's progress, not just your individual progress
+- **Automatic Navigation**: After successful reset, players are automatically navigated back to the grid page
 
 ## 🎮 Puzzle Progression System
 
@@ -696,7 +858,7 @@ For issues or questions, please open an issue on the project repository or conta
 **Built with ❤️ for the Reddit community using Devvit, React, TypeScript, and Framer Motion**m-right (bg-slate-900/50 with backdrop-blur-sm) shows "X/9" puzzles solved and completion percentage for the entire community
 6. **Explore the Starfield**: Enjoy the animated background with 50+ twinkling stars (randomized positions, 2-5 second opacity/scale animations), flowing SVG connection lines between planets (with glow filters and arrowhead markers), and rotating inner rings on each planet (20-second rotation cycles with dashed strokes)
 7. **Starting Points**: Three puzzles are immediately available: r/Math (Puzzle 1), r/History (Puzzle 2), and r/Codes (Puzzle 3) - choose any to begin your journey
-8. **Reset Option**: Use the "🔄 Reset Progress" button in the top-right (bg-red-500 with hover:bg-red-600) to restart the community puzzle hunt (requires confirmation dialog, then calls /api/reset-game and refreshes state)
+8. **Reset Option**: Use the "🔄 Reset Progress" button in the top-right to restart the community puzzle hunt (requires confirmation dialog, then calls /api/reset-game, refreshes state, and navigates back to grid)
 
 ### **🧩 Solving Individual Puzzles**
 
@@ -870,7 +1032,7 @@ When all 9 puzzles are solved by the community, everyone experiences the spectac
 
 **🎮 Interactive Victory Options:**
 - **"View Puzzle Grid"** button: Return to the completed grid with all pieces revealed and "?from=victory" parameter
-- **"Reset Progress"** button: Start a fresh community puzzle hunt with confirmation dialog and API call to `/api/reset-game`
+- **"Reset Progress"** button: Start a fresh community puzzle hunt with confirmation dialog, API call to `/api/reset-game`, and automatic navigation back to grid
 
 ## 🎮 Complete Game Flow & Architecture
 
