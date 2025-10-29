@@ -10,3 +10,4 @@ webroot
 dist
 .env
 docs/debugging.txt
+src/shared/data/puzzleConfig.ts
