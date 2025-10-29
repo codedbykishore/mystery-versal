@@ -28,10 +28,8 @@ const PuzzlePage: React.FC = () => {
       return;
     }
 
-    // If puzzle is already solved, show it but don't allow re-submission
-    if (tileState === 'solved') {
-      // Could show a "already solved" state here
-    }
+    // If puzzle is already solved, stay on page and show solved state
+    // No redirect needed - user can view the puzzle and go back manually
   }, [puzzle, tileState, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,8 +44,9 @@ const PuzzlePage: React.FC = () => {
       const result = await submitAnswer(puzzleId, answer.trim());
       
       if (result.success) {
-        // Navigate back to grid immediately on success
-        navigate('/grid');
+        // Stay on page to show solved state - don't navigate away
+        // User can manually go back to grid to see updated state
+        setAnswer(''); // Clear the input
       } else {
         setError(result.error || 'Incorrect answer. Please try again.');
       }
@@ -112,14 +111,14 @@ const PuzzlePage: React.FC = () => {
         <div className="bg-white rounded-2xl p-8 shadow-lg max-w-2xl w-full">
           {/* Puzzle already solved state */}
           {tileState === 'solved' && (
-            <div className="text-center mb-6">
+            <div className="text-center py-8">
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-green-600 mb-2">
-                Already Solved!
+                Solved!
               </h2>
               <p className="text-gray-600">
                 This puzzle has been completed by the community.

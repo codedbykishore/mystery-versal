@@ -79,15 +79,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 
   const submitAnswer = async (puzzleId: number, answer: string): Promise<SubmitAnswerResponse> => {
     try {
-      // Optimistic update - temporarily add to solved puzzles
-      const optimisticState = {
-        ...gameState,
-        solvedPuzzles: [...gameState.solvedPuzzles, puzzleId].sort((a, b) => a - b),
-        totalSolved: gameState.totalSolved + 1,
-        version: gameState.version + 1
-      };
-      setGameState(optimisticState);
-
+      // Don't do optimistic update - wait for server validation first
       const response = await fetch('/api/submit-answer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,25 +87,18 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
       });
       
       if (!response.ok) {
-        // Rollback optimistic update
-        await refreshState();
         throw new Error('Failed to submit answer');
       }
       
       const result: SubmitAnswerResponse = await response.json();
       
       if (result.success) {
-        // Refresh to get the actual server state
-        await refreshState();
-      } else {
-        // Rollback optimistic update on incorrect answer
+        // Only refresh state when answer is correct
         await refreshState();
       }
       
       return result;
     } catch (err) {
-      // Rollback optimistic update on error
-      await refreshState();
       setError(err instanceof Error ? err.message : 'Unknown error');
       throw err;
     }
