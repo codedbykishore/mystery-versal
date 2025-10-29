@@ -7,3 +7,4 @@ export { default as SuccessAnimation } from './SuccessAnimation';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { ConnectionLine } from './ConnectionLine';
 export { LockIcon } from './LockIcon';
+export { default as AndroidGridLayout } from './AndroidGridLayout';

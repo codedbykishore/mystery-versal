@@ -1,14 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useGameContext } from '../context/GameContext';
+import { usePlatform } from '../context/PlatformContext';
 import { useGlobalGameState } from '../hooks';
 import { LoadingSpinner, ConnectionLine, LockIcon } from '../components';
+import AndroidGridLayout from '../components/AndroidGridLayout';
 
 const GridPage: React.FC = () => {
   const navigate = useNavigate();
   const { gridMapping, loading, error } = useGameContext();
   const { gameState } = useGlobalGameState();
+  const { platform, fullscreen } = usePlatform();
+
+  // Properly detect mobile with state and resize listener
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    // Check on mount
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Use Android layout for Android platform when not in fullscreen
+  if (platform === 'android' && !fullscreen) {
+    return <AndroidGridLayout />;
+  }
 
 
 
@@ -63,34 +88,40 @@ const GridPage: React.FC = () => {
     'r/Science', 'r/Geography', 'r/Chemistry',
     'r/Biology', 'r/Linguistics', 'r/Art'
   ];
-
+  
   // Create planet nodes from grid mapping
   const planets = gridMapping.map((gridPos, index) => {
     // Define positions for 9 planets in a space diagram layout
+    // Using viewBox 0 0 1000 800 for all screen sizes
     const positions = [
       // Top tier - 3 planets
-      { x: 200, y: 100, tier: 'top' },
-      { x: 500, y: 100, tier: 'top' },
-      { x: 800, y: 100, tier: 'top' },
+      { x: 200, y: 140, tier: 'top' },
+      { x: 500, y: 140, tier: 'top' },
+      { x: 800, y: 140, tier: 'top' },
       // Mid tier - 3 planets
-      { x: 200, y: 300, tier: 'mid' },
-      { x: 500, y: 300, tier: 'mid' },
-      { x: 800, y: 300, tier: 'mid' },
+      { x: 200, y: 380, tier: 'mid' },
+      { x: 500, y: 380, tier: 'mid' },
+      { x: 800, y: 380, tier: 'mid' },
       // Bottom tier - 3 planets
-      { x: 350, y: 500, tier: 'bottom' },
-      { x: 500, y: 550, tier: 'core' },
-      { x: 650, y: 500, tier: 'bottom' },
+      { x: 350, y: 620, tier: 'bottom' },
+      { x: 500, y: 680, tier: 'core' },
+      { x: 650, y: 620, tier: 'bottom' },
     ];
 
     const pos = positions[index] || { x: 500, y: 400, tier: 'mid' };
     const subredditName = subredditNames[index] || `Puzzle ${gridPos.puzzleId || gridPos.position}`;
+
+    // Use larger sizes for better visibility (desktop gets large sizes, mobile gets even larger)
+    const desktopSize = pos.tier === 'core' ? 160 : 110;
+    const mobileSize = pos.tier === 'core' ? 180 : 120;
+    const actualSize = isMobile ? mobileSize : desktopSize;
 
     return {
       id: `puzzle-${gridPos.puzzleId || gridPos.position}`,
       label: subredditName,
       x: pos.x,
       y: pos.y,
-      size: pos.tier === 'core' ? 120 : 80,
+      size: actualSize,
       tier: pos.tier,
       unlocked: gridPos.state === 'unlocked' || gridPos.state === 'solved',
       solved: gridPos.state === 'solved',
@@ -102,28 +133,28 @@ const GridPage: React.FC = () => {
   // Define connection paths showing unlocking flow (not play order)
   const connections = [
     // r/Math (0) unlocks r/Science (3)
-    { from: 0, to: 3, path: 'M 200 140 Q 200 220 200 260', visible: true }, // Math → Science
+    { from: 0, to: 3, path: 'M 200 195 Q 200 290 200 325', visible: true }, // Math → Science
 
     // r/Science (3) unlocks r/Biology (6)
-    { from: 3, to: 6, path: 'M 200 340 Q 275 420 310 460', visible: true }, // Science → Biology
+    { from: 3, to: 6, path: 'M 200 435 Q 275 525 310 565', visible: true }, // Science → Biology
 
     // r/Biology (6) unlocks r/Linguistics (7)
-    { from: 6, to: 7, path: 'M 390 500 Q 445 525 460 550', visible: true }, // Biology → Linguistics
+    { from: 6, to: 7, path: 'M 405 620 Q 452 650 460 680', visible: true }, // Biology → Linguistics
 
     // r/History (1) unlocks r/Geography (4)
-    { from: 1, to: 4, path: 'M 500 140 Q 500 220 500 260', visible: true }, // History → Geography
+    { from: 1, to: 4, path: 'M 500 195 Q 500 290 500 325', visible: true }, // History → Geography
 
     // r/Geography (4) unlocks r/Linguistics (7)
-    { from: 4, to: 7, path: 'M 500 340 Q 500 430 500 490', visible: true }, // Geography → Linguistics
+    { from: 4, to: 7, path: 'M 500 435 Q 500 550 500 600', visible: true }, // Geography → Linguistics
 
     // r/Codes (2) unlocks r/Chemistry (5)
-    { from: 2, to: 5, path: 'M 800 140 Q 800 220 800 260', visible: true }, // Codes → Chemistry
+    { from: 2, to: 5, path: 'M 800 195 Q 800 290 800 325', visible: true }, // Codes → Chemistry
 
     // r/Chemistry (5) unlocks r/Art (8)
-    { from: 5, to: 8, path: 'M 800 340 Q 725 420 690 460', visible: true }, // Chemistry → Art
+    { from: 5, to: 8, path: 'M 800 435 Q 725 525 690 565', visible: true }, // Chemistry → Art
 
     // r/Art (8) unlocks r/Linguistics (7)
-    { from: 8, to: 7, path: 'M 610 500 Q 555 525 540 550', visible: true }, // Art → Linguistics
+    { from: 8, to: 7, path: 'M 595 620 Q 548 650 540 680', visible: true }, // Art → Linguistics
   ];
 
   const getGradientId = (tier: string, id: string) => {
@@ -176,10 +207,10 @@ const GridPage: React.FC = () => {
       </div>
 
       {/* SVG Container with ID for positioning reference */}
-      <div id="svg-container" className="relative w-full max-w-6xl h-auto">
+      <div id="svg-container" className={`relative w-full h-auto ${isMobile ? 'px-0' : 'px-4 max-w-6xl'}`}>
         <svg
-          viewBox="0 0 1000 700"
-          className="w-full max-w-6xl h-auto"
+          viewBox="0 0 1000 850"
+          className="w-full h-auto"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
@@ -311,16 +342,17 @@ const GridPage: React.FC = () => {
                 stroke="none"
               />
 
-              {/* Planet label */}
+              {/* Planet label - Responsive font size */}
               <text
                 x={planet.x}
-                y={planet.y + planet.size / 2 + 25}
+                y={planet.y + planet.size / 2 + (isMobile ? 38 : 32)}
                 textAnchor="middle"
                 fill="rgba(255, 255, 255, 0.9)"
-                fontSize={planet.tier === 'core' ? '16' : '14'}
-                fontWeight={planet.tier === 'core' ? '600' : '400'}
+                fontSize={isMobile ? (planet.tier === 'core' ? '32' : '26') : (planet.tier === 'core' ? '24' : '20')}
+                fontWeight={planet.tier === 'core' ? '600' : '500'}
                 letterSpacing="0.5"
                 style={{ pointerEvents: 'none' }}
+                className="planet-label"
               >
                 {planet.label}
               </text>
@@ -351,23 +383,24 @@ const GridPage: React.FC = () => {
 
               {/* Lock icon for locked planets */}
               {!planet.unlocked && (
-                <g style={{ pointerEvents: 'none' }}>
-                  <LockIcon x={planet.x} y={planet.y} size={18} opacity={0.9} />
+                <g style={{ pointerEvents: 'none' }} className="lock-icon-group">
+                  <LockIcon x={planet.x} y={planet.y} size={isMobile ? 32 : 26} opacity={0.9} />
                 </g>
               )}
 
             </g>
           ))}
 
-          {/* Title */}
+          {/* Title - Responsive */}
           <text
             x="500"
-            y="50"
+            y={isMobile ? "65" : "55"}
             textAnchor="middle"
             fill="rgba(255, 255, 255, 0.95)"
-            fontSize="28"
+            fontSize={isMobile ? "52" : "40"}
             fontWeight="300"
             letterSpacing="3"
+            className="grid-title"
           >
             MYSTERY VERSAL
           </text>
@@ -385,9 +418,9 @@ const GridPage: React.FC = () => {
               }`}
             style={{
               left: `${(planet.x / 1000) * 100}%`,
-              top: `${(planet.y / 700) * 100}%`,
+              top: `${(planet.y / 850) * 100}%`,
               width: `${Math.max((planet.size / 1000) * 100, 8)}%`,
-              height: `${Math.max((planet.size / 700) * 100, 8)}%`,
+              height: `${Math.max((planet.size / 850) * 100, 8)}%`,
               transform: 'translate(-50%, -50%)',
               background: 'transparent',
               border: 'none',

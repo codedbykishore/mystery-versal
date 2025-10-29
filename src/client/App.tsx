@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { GameProvider } from './context/GameContext';
+import { PlatformProvider } from './context/PlatformContext';
 import { ErrorBoundary } from './components';
 import { IntroPage, GridPage, PuzzlePage, VictoryPage } from './pages';
 import { preloadResources, performanceMonitor } from './utils/performance';
@@ -28,19 +29,21 @@ export const App = () => {
 
   return (
     <ErrorBoundary>
-      <GameProvider>
-        <Router>
-          <div className="min-h-screen bg-gray-50">
-            <Routes>
-              <Route path="/" element={<IntroPage />} />
-              <Route path="/grid" element={<GridPage />} />
-              <Route path="/puzzle/:id" element={<PuzzlePage />} />
-              <Route path="/victory" element={<VictoryPage />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </div>
-        </Router>
-      </GameProvider>
+      <PlatformProvider>
+        <GameProvider>
+          <Router>
+            <div className="min-h-screen bg-gray-50">
+              <Routes>
+                <Route path="/" element={<IntroPage />} />
+                <Route path="/grid" element={<GridPage />} />
+                <Route path="/puzzle/:id" element={<PuzzlePage />} />
+                <Route path="/victory" element={<VictoryPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </div>
+          </Router>
+        </GameProvider>
+      </PlatformProvider>
     </ErrorBoundary>
   );
 };

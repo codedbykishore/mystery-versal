@@ -190,9 +190,15 @@ body {
     font-size: 2rem;
     line-height: 2.5rem;
   }
+
+  /* Grid page mobile styles - sizes handled in component, just add spacing */
+  #svg-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 640px) and (max-width: 1023px) {
   /* Tablet styles */
   .puzzle-tile-tablet {
     width: 120px;
