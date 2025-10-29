@@ -98,9 +98,6 @@ const PuzzlePage: React.FC = () => {
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
             {puzzle.subreddit}
           </h1>
-          <p className="text-gray-600">
-            Puzzle {puzzleId} of 9
-          </p>
         </div>
 
         <div className="w-24" /> {/* Spacer for centering */}

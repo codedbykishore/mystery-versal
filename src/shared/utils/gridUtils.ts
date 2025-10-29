@@ -21,12 +21,10 @@ export const gridPositionToPuzzleId = (gridPosition: number): number => {
  * - r/Math (1), r/History (2), r/Codes (3) are always unlocked (starting points)
  * - r/Math (1) unlocks r/Science (4)
  * - r/Science (4) unlocks r/Biology (7)
- * - r/Biology (7) unlocks r/Linguistics (8)
  * - r/History (2) unlocks r/Geography (5)
- * - r/Geography (5) unlocks r/Linguistics (8)
  * - r/Codes (3) unlocks r/Chemistry (6)
  * - r/Chemistry (6) unlocks r/Art (9)
- * - r/Art (9) unlocks r/Linguistics (8)
+ * - r/Linguistics (8) unlocks ONLY when ALL THREE are solved: r/Biology (7) AND r/Geography (5) AND r/Art (9)
  */
 export const isPuzzleUnlocked = (puzzleId: number, gameState: GlobalGameState): boolean => {
   const solvedPuzzles = gameState.solvedPuzzles;
@@ -53,8 +51,8 @@ export const isPuzzleUnlocked = (puzzleId: number, gameState: GlobalGameState): 
     case 7: // r/Biology - unlocked by r/Science
       return solvedPuzzles.includes(4);
     
-    case 8: // r/Linguistics - unlocked by r/Biology OR r/Geography OR r/Art
-      return solvedPuzzles.includes(7) || solvedPuzzles.includes(5) || solvedPuzzles.includes(9);
+    case 8: // r/Linguistics - unlocked by r/Biology AND r/Geography AND r/Art (all three must be solved)
+      return solvedPuzzles.includes(7) && solvedPuzzles.includes(5) && solvedPuzzles.includes(9);
     
     case 9: // r/Art - unlocked by r/Chemistry
       return solvedPuzzles.includes(6);
