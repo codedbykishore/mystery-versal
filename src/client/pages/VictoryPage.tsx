@@ -3,12 +3,10 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAnimations, useGlobalGameState } from '../hooks';
 import { Button } from '../components';
-import { getPuzzlePieceImage } from '../utils/imageUtils';
-import { puzzleToGridMapping } from '../../shared/data/puzzleConfig';
 
 const VictoryPage: React.FC = () => {
   const navigate = useNavigate();
-  const { pageVariants, glowVariants } = useAnimations();
+  const { pageVariants } = useAnimations();
   const { gameState, refreshState } = useGlobalGameState();
   const [showConfetti, setShowConfetti] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
@@ -141,78 +139,29 @@ const VictoryPage: React.FC = () => {
         </motion.p>
       </div>
 
-      {/* Complete puzzle grid with golden glow */}
-      <motion.div
-        className="bg-white rounded-3xl p-8 shadow-2xl mb-12"
-        variants={glowVariants}
-        animate="animate"
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        <div className="grid grid-cols-3 gap-2 mb-6">
-          {Array.from({ length: 9 }, (_, i) => {
-            const gridPosition = i + 1;
-            const puzzleId = Object.entries(puzzleToGridMapping)
-              .find(([_, pos]) => pos === gridPosition)?.[0];
-            
-            if (!puzzleId) return null;
-            
-            const pieceImage = getPuzzlePieceImage(parseInt(puzzleId), true);
-            
-            return (
-              <motion.div
-                key={gridPosition}
-                className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden"
-                initial={{ scale: 0, rotate: 180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ 
-                  delay: 1.8 + (i * 0.1),
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 15
-                }}
-              >
-                <img 
-                  src={pieceImage} 
-                  alt={`Completed puzzle piece ${gridPosition}`}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Final message */}
-        <motion.div
-          className="text-center"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 2.5, duration: 0.8 }}
-        >
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            "KNOWLEDGE IS POWER, SCATTERED ACROSS MANY MINDS, UNITED IN PURPOSE"
-          </h2>
-          <p className="text-gray-600 text-lg">
-            The collective wisdom of Reddit communities has been assembled!
-          </p>
-        </motion.div>
-      </motion.div>
-
       {/* Action buttons */}
       <motion.div
         className="flex flex-col sm:flex-row gap-4 z-10"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 3, duration: 0.8 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
       >
         <Button
           variant="primary"
           size="large"
           onClick={() => navigate('/grid?from=victory')}
-          className="bg-white text-gray-900 hover:bg-gray-100"
+          className="text-xl px-12 py-4 rounded-2xl font-bold shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-white"
+          style={{ 
+            backgroundColor: '#ffffff',
+            color: '#581c87'
+          }}
         >
-          View Puzzle Grid
+          <div className="flex items-center space-x-3">
+            <span className="font-extrabold">View Puzzle Grid</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </div>
         </Button>
         
         <Button
