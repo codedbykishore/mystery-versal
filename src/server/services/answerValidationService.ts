@@ -1,5 +1,4 @@
 import { SubmitAnswerResponse } from '../../shared/types/api';
-import { puzzleConfiguration } from '../../shared/data/puzzleConfig';
 import { getPuzzleById, isSetCompleted } from '../../shared/utils/gridUtils';
 import { gameStateService } from './gameStateService';
 
@@ -17,7 +16,7 @@ class AnswerValidationService {
     return sanitized === correct;
   }
 
-  async validateAnswer(puzzleId: number, answer: string): Promise<SubmitAnswerResponse> {
+  async validateAnswer(userId: string, puzzleId: number, answer: string): Promise<SubmitAnswerResponse> {
     try {
       const puzzle = getPuzzleById(puzzleId);
       
@@ -39,8 +38,8 @@ class AnswerValidationService {
         };
       }
 
-      // Mark puzzle as solved and update global state
-      const updatedGameState = await gameStateService.markPuzzleSolved(puzzleId);
+      // Mark puzzle as solved and update user's game state
+      const updatedGameState = await gameStateService.markPuzzleSolved(userId, puzzleId);
       
       // Prepare response
       const response: SubmitAnswerResponse = {

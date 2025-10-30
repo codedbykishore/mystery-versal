@@ -38,10 +38,26 @@ const checkRateLimit = (identifier: string): boolean => {
   return true;
 };
 
-// Get current global game state
+// Get current user's game state
 router.get('/api/game-state', async (_req, res): Promise<void> => {
   try {
-    const gameState = await gameStateService.getGameState();
+    // Get current user ID
+    const username = await reddit.getCurrentUsername();
+    if (!username) {
+      const errorResponse: ErrorResponse = {
+        success: false,
+        error: {
+          code: 'AUTH_ERROR',
+          message: 'User not authenticated',
+          retryable: false
+        },
+        timestamp: new Date().toISOString()
+      };
+      res.status(401).json(errorResponse);
+      return;
+    }
+
+    const gameState = await gameStateService.getGameState(username);
     res.json(gameState);
   } catch (error) {
     console.error('Error fetching game state:', error);
@@ -77,8 +93,23 @@ router.post('/api/submit-answer', async (req, res): Promise<void> => {
       return;
     }
 
+    // Get current user ID
+    const username = await reddit.getCurrentUsername();
+    if (!username) {
+      const errorResponse: ErrorResponse = {
+        success: false,
+        error: {
+          code: 'AUTH_ERROR',
+          message: 'User not authenticated',
+          retryable: false
+        },
+        timestamp: new Date().toISOString()
+      };
+      res.status(401).json(errorResponse);
+      return;
+    }
+
     // Rate limiting
-    const username = await reddit.getCurrentUsername() || 'anonymous';
     if (!checkRateLimit(username)) {
       const errorResponse: ErrorResponse = {
         success: false,
@@ -93,7 +124,7 @@ router.post('/api/submit-answer', async (req, res): Promise<void> => {
       return;
     }
 
-    const result = await answerValidationService.validateAnswer(puzzleId, answer);
+    const result = await answerValidationService.validateAnswer(username, puzzleId, answer);
     res.json(result);
   } catch (error) {
     console.error('Error submitting answer:', error);
@@ -110,11 +141,18 @@ router.post('/api/submit-answer', async (req, res): Promise<void> => {
   }
 });
 
-// Reset game state (development only)
+// Reset game state for current user (development only)
 router.post('/api/reset-game', async (_req, res): Promise<void> => {
   try {
-    await gameStateService.resetGameState();
-    const gameState = await gameStateService.getGameState();
+    // Get current user ID
+    const username = await reddit.getCurrentUsername();
+    if (!username) {
+      res.status(401).json({ success: false, error: 'User not authenticated' });
+      return;
+    }
+
+    await gameStateService.resetGameState(username);
+    const gameState = await gameStateService.getGameState(username);
     res.json({ success: true, gameState });
   } catch (error) {
     console.error('Error resetting game:', error);

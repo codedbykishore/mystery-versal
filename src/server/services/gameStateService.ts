@@ -1,14 +1,22 @@
 import { redis } from '@devvit/web/server';
 import { GlobalGameState } from '../../shared/types/game';
-import { getCompletedSets, isGameComplete } from '../../shared/utils/gridUtils';
+import { getCompletedSets } from '../../shared/utils/gridUtils';
 
-const GAME_STATE_KEY = 'mystery_versal:game_state';
-const GAME_VERSION_KEY = 'mystery_versal:game_version';
+const GAME_STATE_KEY_PREFIX = 'mystery_versal:user_game_state:';
+const GAME_VERSION_KEY_PREFIX = 'mystery_versal:user_game_version:';
 
 class GameStateService {
-  private async getStoredGameState(): Promise<GlobalGameState | null> {
+  private getUserGameStateKey(userId: string): string {
+    return `${GAME_STATE_KEY_PREFIX}${userId}`;
+  }
+
+  private getUserVersionKey(userId: string): string {
+    return `${GAME_VERSION_KEY_PREFIX}${userId}`;
+  }
+
+  private async getStoredGameState(userId: string): Promise<GlobalGameState | null> {
     try {
-      const stateJson = await redis.get(GAME_STATE_KEY);
+      const stateJson = await redis.get(this.getUserGameStateKey(userId));
       if (!stateJson) return null;
       
       return JSON.parse(stateJson) as GlobalGameState;
@@ -18,27 +26,27 @@ class GameStateService {
     }
   }
 
-  private async saveGameState(gameState: GlobalGameState): Promise<void> {
+  private async saveGameState(userId: string, gameState: GlobalGameState): Promise<void> {
     try {
       // Increment version for optimistic updates
-      gameState.version = await redis.incrBy(GAME_VERSION_KEY, 1);
+      gameState.version = await redis.incrBy(this.getUserVersionKey(userId), 1);
       gameState.lastUpdated = new Date().toISOString();
       
-      await redis.set(GAME_STATE_KEY, JSON.stringify(gameState));
+      await redis.set(this.getUserGameStateKey(userId), JSON.stringify(gameState));
     } catch (error) {
       console.error('Error saving game state:', error);
       throw error;
     }
   }
 
-  async getGameState(): Promise<GlobalGameState> {
-    const storedState = await this.getStoredGameState();
+  async getGameState(userId: string): Promise<GlobalGameState> {
+    const storedState = await this.getStoredGameState(userId);
     
     if (storedState) {
       return storedState;
     }
 
-    // Initialize default game state
+    // Initialize default game state for this user
     const initialState: GlobalGameState = {
       solvedPuzzles: [],
       currentSet: 1,
@@ -49,12 +57,12 @@ class GameStateService {
       version: 1
     };
 
-    await this.saveGameState(initialState);
+    await this.saveGameState(userId, initialState);
     return initialState;
   }
 
-  async markPuzzleSolved(puzzleId: number): Promise<GlobalGameState> {
-    const currentState = await this.getGameState();
+  async markPuzzleSolved(userId: string, puzzleId: number): Promise<GlobalGameState> {
+    const currentState = await this.getGameState(userId);
     
     // Don't add if already solved
     if (currentState.solvedPuzzles.includes(puzzleId)) {
@@ -78,11 +86,11 @@ class GameStateService {
     // For independent paths, currentSet is not really used, but keep it for compatibility
     updatedState.currentSet = 1;
 
-    await this.saveGameState(updatedState);
+    await this.saveGameState(userId, updatedState);
     return updatedState;
   }
 
-  async resetGameState(): Promise<void> {
+  async resetGameState(userId: string): Promise<void> {
     const initialState: GlobalGameState = {
       solvedPuzzles: [],
       currentSet: 1,
@@ -93,13 +101,13 @@ class GameStateService {
       version: 1
     };
 
-    await redis.del(GAME_STATE_KEY);
-    await redis.del(GAME_VERSION_KEY);
-    await this.saveGameState(initialState);
+    await redis.del(this.getUserGameStateKey(userId));
+    await redis.del(this.getUserVersionKey(userId));
+    await this.saveGameState(userId, initialState);
   }
 
-  async getGameVersion(): Promise<number> {
-    const version = await redis.get(GAME_VERSION_KEY);
+  async getGameVersion(userId: string): Promise<number> {
+    const version = await redis.get(this.getUserVersionKey(userId));
     return version ? parseInt(version) : 1;
   }
 }
