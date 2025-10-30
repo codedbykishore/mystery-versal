@@ -84,9 +84,9 @@ const GridPage: React.FC = () => {
 
   // Subreddit names mapping
   const subredditNames = [
-    'r/Math', 'r/History', 'r/Codes',
-    'r/Science', 'r/Geography', 'r/Chemistry',
-    'r/Biology', 'r/Linguistics', 'r/Art'
+    'Math', 'History', 'Codes',
+    'Science', 'Geography', 'Chemistry',
+    'Biology', 'Linguistics', 'Art'
   ];
   
   // Create planet nodes from grid mapping

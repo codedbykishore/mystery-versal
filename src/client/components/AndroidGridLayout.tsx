@@ -41,9 +41,9 @@ const AndroidGridLayout: React.FC = () => {
 
   // Subreddit names mapping
   const subredditNames = [
-    'r/Math', 'r/History', 'r/Codes',
-    'r/Science', 'r/Geography', 'r/Chemistry',
-    'r/Biology', 'r/Linguistics', 'r/Art'
+    'Math', 'History', 'Codes',
+    'Science', 'Geography', 'Chemistry',
+    'Biology', 'Linguistics', 'Art'
   ];
 
   // Create simplified grid for mobile
@@ -209,7 +209,7 @@ const AndroidGridLayout: React.FC = () => {
             width: '80px',
           }}
         >
-          {puzzle.label.replace('r/', '')}
+          {puzzle.label}
         </div>
       </motion.div>
     );
