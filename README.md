@@ -18,7 +18,9 @@
 
 **Transform Reddit communities into collaborative puzzle solvers with globally-shared progress and real-time unlocks**
 
-[🎮 **Play Now**](https://reddit.com/mysteryversal) • [📖 **Documentation**](docs/README.md) • [🎯 **Submit Ideas**](https://github.com/codedbykishore/mystery-versal/discussions)
+<a href="https://www.reddit.com/r/mystery_versal_dev/comments/1o83iyz/mysteryversal/" target="_blank">
+  <img src="https://img.shields.io/badge/🎮_PLAY_NOW-FF4500?style=for-the-badge&logo=reddit&logoColor=white&labelColor=FF4500" alt="Play Now" height="50"/>
+</a>
 
 </div>
 
@@ -140,7 +142,7 @@ There are no leaderboards dividing us. Just **one puzzle, one community, one goa
 - Build Season 2 puzzle sets
 
 ### For Puzzle Creators
-Have an idea? We're always looking for creative challenges. [Submit here →](https://github.com/codedbykishore/mystery-versal/discussions)
+Have an idea? We're always looking for creative challenges. [Submit your puzzle ideas →](https://github.com/codedbykishore/mystery-versal/discussions/new?category=ideas)
 
 ---
 
