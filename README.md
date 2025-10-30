@@ -11,7 +11,7 @@
 ---
 
 <div align="center">
-  <img src="images/mystery-versal-banner.png" alt="Mystery Versal Game Grid" width="600" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(255,69,0,0.3);"/>
+  <img src="images/mystery-versal-banner.png" alt="Mystery Versal Game Grid" width="450" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(255,69,0,0.3);"/>
 </div>
 
 ---
@@ -19,7 +19,7 @@
 **Transform Reddit communities into collaborative puzzle solvers with globally-shared progress and real-time unlocks**
 
 <a href="https://www.reddit.com/r/mystery_versal_dev/comments/1o83iyz/mysteryversal/" target="_blank">
-  <img src="https://img.shields.io/badge/🎮_PLAY_NOW-FF4500?style=for-the-badge&logo=reddit&logoColor=white&labelColor=FF4500" alt="Play Now" height="50"/>
+  <img src="https://img.shields.io/badge/🎮_PLAY_NOW-FF4500?style=for-the-badge&logoColor=white" alt="Play Now" height="60"/>
 </a>
 
 </div>
