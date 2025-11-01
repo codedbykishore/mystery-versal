@@ -90,7 +90,7 @@ const PuzzlePage: React.FC = () => {
 
         <div className="text-center">
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
-            {puzzle.subreddit}
+            {puzzle.title}
           </h1>
         </div>
 
@@ -112,7 +112,7 @@ const PuzzlePage: React.FC = () => {
                 Solved!
               </h2>
               <p className="text-gray-600">
-                This puzzle has been completed by the community.
+                This puzzle has been completed.
               </p>
             </div>
           )}
@@ -129,7 +129,7 @@ const PuzzlePage: React.FC = () => {
                 <path fillRule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-3.5a.75.75 0 011.5 0v3.5A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" clipRule="evenodd" />
                 <path fillRule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" clipRule="evenodd" />
               </svg>
-              <span>Go to {puzzle.subreddit} Post</span>
+              <span>Go to Post</span>
             </a>
           </div>
 
@@ -142,7 +142,7 @@ const PuzzlePage: React.FC = () => {
                   placeholder="Enter your answer here..."
                   value={answer}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAnswer(e.target.value)}
-                  error={error || undefined}
+                  error={error ?? ''}
                   disabled={submitting}
                   autoFocus
                   className="text-center"

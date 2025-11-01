@@ -2,6 +2,7 @@
 export interface Puzzle {
   id: number;                    // Solve order (1-9)
   subreddit: string;            // e.g., "r/Math"
+  title: string;                // Puzzle title (e.g., "The Foundation")
   postLink: string;             // Reddit post URL
   answer: string;               // Correct answer
   hintText: string;             // Hint for next puzzle
