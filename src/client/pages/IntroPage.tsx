@@ -50,7 +50,7 @@ const IntroPage: React.FC = () => {
             <div className="text-center z-10 max-w-4xl mx-auto">
                 {/* Logo/Icon */}
                 <motion.div
-                    className="text-8xl mb-8"
+                    className="text-8xl mb-6"
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{
@@ -65,7 +65,7 @@ const IntroPage: React.FC = () => {
 
                 {/* Title */}
                 <motion.h1
-                    className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl"
+                    className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl"
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.8 }}
@@ -76,7 +76,7 @@ const IntroPage: React.FC = () => {
 
                 {/* Subtitle */}
                 <motion.p
-                    className="text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl mx-auto leading-relaxed font-medium"
+                    className="text-xl md:text-2xl text-gray-100 mb-6 max-w-3xl mx-auto leading-relaxed font-medium"
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.9, duration: 0.8 }}
@@ -88,27 +88,24 @@ const IntroPage: React.FC = () => {
 
                 {/* Features */}
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
+                    className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto"
                     initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 1.2, duration: 0.8 }}
                 >
-                    <div className="rounded-2xl p-6 border border-white border-opacity-30" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)' }}>
-                        <div className="text-4xl mb-4">🔍</div>
-                        <h3 className="text-lg font-bold text-white mb-2 drop-shadow-lg">Explore Communities</h3>
-                        <p className="text-gray-100 text-sm font-medium">Visit different Reddit communities to find hidden clues</p>
+                    <div className="rounded-2xl p-4 border border-white border-opacity-30" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)' }}>
+                        <div className="text-4xl mb-2">🔍</div>
+                        <h3 className="text-lg font-bold text-white drop-shadow-lg">Explore</h3>
                     </div>
 
-                    <div className="rounded-2xl p-6 border border-white border-opacity-30" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)' }}>
-                        <div className="text-4xl mb-4">🧠</div>
-                        <h3 className="text-lg font-bold text-white mb-2 drop-shadow-lg">Solve Puzzles</h3>
-                        <p className="text-gray-100 text-sm font-medium">Use logic, creativity, and community knowledge</p>
+                    <div className="rounded-2xl p-4 border border-white border-opacity-30" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)' }}>
+                        <div className="text-4xl mb-2">🧠</div>
+                        <h3 className="text-lg font-bold text-white drop-shadow-lg">Solve Puzzles</h3>
                     </div>
 
-                    <div className="rounded-2xl p-6 border border-white border-opacity-30" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)' }}>
-                        <div className="text-4xl mb-4">🏆</div>
-                        <h3 className="text-lg font-bold text-white mb-2 drop-shadow-lg">Unlock Mysteries</h3>
-                        <p className="text-gray-100 text-sm font-medium">Piece together the final image and reveal the secret</p>
+                    <div className="rounded-2xl p-4 border border-white border-opacity-30" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)' }}>
+                        <div className="text-4xl mb-2">🏆</div>
+                        <h3 className="text-lg font-bold text-white drop-shadow-lg">Unlock Mysteries</h3>
                     </div>
                 </motion.div>
 
@@ -145,7 +142,7 @@ const IntroPage: React.FC = () => {
 
                 {/* Instructions */}
                 <motion.div
-                    className="mt-12 text-center"
+                    className="mt-8 text-center"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2, duration: 0.8 }}
