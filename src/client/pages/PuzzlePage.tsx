@@ -171,7 +171,7 @@ const PuzzlePage: React.FC = () => {
               <li>• <strong>Mobile:</strong> Tap the button to visit the Reddit post</li>
               <li>• Solve the puzzle in the post</li>
               <li>• Enter your answer in the field above</li>
-              <li>• Correct answers unlock the next puzzle for everyone!</li>
+              <li>• Correct answers unlock the next puzzle!</li>
             </ul>
           </div>
         </div>
